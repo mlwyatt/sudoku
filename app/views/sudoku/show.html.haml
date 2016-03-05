@@ -1,0 +1,17 @@
+- provide(:title, "Sudoku")
+.container
+  %h3 Sudoku Board
+  = link_to 'Reset Board', '#', class: 'btn-flat', onclick: 'reset()'
+  = link_to '1', '#', class: 'btn-flat', onclick: "highlight_number('#{1}')"
+  = link_to '2', '#', class: 'btn-flat', onclick: "highlight_number('#{2}')"
+  = link_to '3', '#', class: 'btn-flat', onclick: "highlight_number('#{3}')"
+  = link_to '4', '#', class: 'btn-flat', onclick: "highlight_number('#{4}')"
+  = link_to '5', '#', class: 'btn-flat', onclick: "highlight_number('#{5}')"
+  = link_to '6', '#', class: 'btn-flat', onclick: "highlight_number('#{6}')"
+  = link_to '7', '#', class: 'btn-flat', onclick: "highlight_number('#{7}')"
+  = link_to '8', '#', class: 'btn-flat', onclick: "highlight_number('#{8}')"
+  = link_to '9', '#', class: 'btn-flat', onclick: "highlight_number('#{9}')"
+  %table.centered.bordered.s2{id: 'full-table'}
+    %tbody.sudoku-board
+      = render 'sudoku/partials/show'
+%div{ id: 'sudoku_modal', class: 'modal' }

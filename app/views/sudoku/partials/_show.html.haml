@@ -1,0 +1,5 @@
+- @board.each_with_index do |row,row_i|
+  %tr
+    - row.each_with_index do |cell,cell_i|
+      %td{id: "row_#{row_i}_col_#{cell_i}", onclick:"list_numbers('#{row_i}','#{cell_i}')"}
+        = cell

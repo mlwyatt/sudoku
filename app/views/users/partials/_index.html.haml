@@ -1,0 +1,8 @@
+- @users.each do |user|
+  %tr
+    %td= user.id
+    %td= user.first_name
+    %td= user.last_name
+    %td= user.email
+    %td
+      = link_to 'Edit', '#', onclick: "editModal('#{controller_name}',#{user.id})", data: { remote: true }, class: 'btn-flat'

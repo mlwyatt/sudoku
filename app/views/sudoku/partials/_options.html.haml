@@ -1,0 +1,12 @@
+.modal-content
+  %table{id: 'mini-table'}
+    %tbody
+      - count = 1
+      - 3.times do |i|
+        %tr
+          - 3. times do |j|
+            %td{id: "cell#{count}", onclick: "choose_number(#{count})"}
+              = count
+              - count = count + 1
+.modal-footer
+  = link_to 'Cancel', '#', onclick: "closeModal('sudoku')", class: 'right btn-flat'

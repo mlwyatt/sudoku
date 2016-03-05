@@ -1,0 +1,17 @@
+- provide(:title, 'All users')
+
+.container
+  .new-user
+  %table.striped.centered
+    %thead
+      %tr
+        %th{ data: {field: 'id'} } ID
+        %th{ data: {field: 'first_name'} } First name
+        %th{ data: {field: 'last_name'} } Last name
+        %th{ data: {field: 'email'} } Email
+        %th{ data: {field: 'edit'} }
+    %tbody.user-index
+      = render 'users/partials/index'
+  .fixed-action-btn{ style: 'bottom:45px; right:24px;' }
+    = link_to '<i class="material-icons">add</i>'.html_safe, '#', onclick: "newModal('#{controller_name}')", data: { remote: true }, class: 'btn-floating btn-large'
+%div{ id: 'users_modal', class: 'modal' }

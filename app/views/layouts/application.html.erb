@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <title>
+          <%= full_title(yield(:title)) %>
+      </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+      <!--<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>-->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <%= stylesheet_link_tag    'application', media: 'all' %>
+      <%= javascript_include_tag 'application' %>
+      <%= html_import_tag "application", "data-turbolinks-track" => true %>
+      <%= csrf_meta_tags %>
+  </head>
+  <body unresolved class="fullbleed layout vertical">
+      <paper-drawer-panel force-narrow="true" id="paperDrawerPanel">
+        <paper-scroll-header-panel drawer fixed>
+          <paper-toolbar id="drawerToolbar">
+            <span class="paper-font-title">Sudoku App</span>
+          </paper-toolbar>
+        </paper-scroll-header-panel>
+        <div main style="overflow-y:scroll">
+            <%= render 'layouts/primary_nav' %>
+            <%= yield %>
+        </div>
+      </paper-drawer-panel>
+  </body>
+</html>

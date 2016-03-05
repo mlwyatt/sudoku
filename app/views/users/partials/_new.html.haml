@@ -1,0 +1,7 @@
+= form_for @user, data: { remote: true }, html: { style: 'display:inline' } do |f|
+  .modal-content
+    %h5 New user
+    = render 'users/partials/form', f: f
+  .modal-footer
+    = link_to 'Cancel', '#', onclick: "closeModal('#{controller_name}')", class: 'right btn-flat btn-flat-primary waves-effect'
+    = f.submit class: 'right btn-flat btn-flat-primary waves-effect', id: 'save_user'

@@ -1,0 +1,16 @@
+- provide(:title, "Log in")
+%h4.center Sign in
+.row
+  = form_for(:session, url: login_path) do |f|
+    .col.l8.m10.s12.offset-l2.offset-m1
+      .row
+        .input-field.col.m6.s12
+          = f.email_field :email, type: "email"
+          = f.label :email
+        .input-field.col.m6.s12
+          = f.password_field :password, type: "password"
+          = f.label :password
+      .row
+        .col.s12
+          %button{ class: "btn waves-effect waves-light right", type: "submit", name: "action" }
+            Sign in
