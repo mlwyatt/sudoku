@@ -1,9 +1,0 @@
-- provide(:title, "#{@user.email}")
-.row
-    %aside.col-md-4
-        %section.user-info
-            %h1
-                = gravatar_for @user
-                = "#{@user.first_name} #{@user.last_name}"
-.row
-    = link_to "Edit", edit_user_path(current_user)
