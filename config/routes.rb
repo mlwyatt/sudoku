@@ -10,8 +10,5 @@ Rails.application.routes.draw do
   match 'sudoku/:notes/notes' => 'sudoku#save_notes', via: [:get,:post], as: :save_notes
   get     'login'     => 'sessions#new'
   post    'login'     => 'sessions#create'
-  delete  'logout'    => 'sessions#destroy'
-
-  resources :users
 
 end
