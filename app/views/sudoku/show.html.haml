@@ -11,7 +11,10 @@
   = link_to '7', '#', class: 'btn-flat', onclick: "highlight_number('#{7}')"
   = link_to '8', '#', class: 'btn-flat', onclick: "highlight_number('#{8}')"
   = link_to '9', '#', class: 'btn-flat', onclick: "highlight_number('#{9}')"
+  = link_to 'Clear', '#', class: 'btn-flat', onclick: "highlight_number('#{0}')"
+  .section
   %table.centered.bordered.s2{id: 'full-table'}
     %tbody.sudoku-board
       = render 'sudoku/partials/show'
+  .section
 %div{ id: 'sudoku_modal', class: 'modal' }
