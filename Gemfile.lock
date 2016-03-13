@@ -237,7 +237,6 @@ DEPENDENCIES
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   sitemap_generator (= 5.1.0)
-  sprockets-rails (~> 2.3.3)
   stathat
   uglifier (>= 1.3.0)
   webrat
