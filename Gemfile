@@ -3,7 +3,6 @@ source 'https://rubygems.org'
 gem 'rename'
 gem 'rails', '4.2.3'
 # gem 'mysql2', '~> 0.3.11'
-gem 'sqlite3'
 gem 'uglifier', '>= 1.3.0'
 gem 'faker', '1.4.2'
 gem 'will_paginate', '3.0.7'
@@ -49,6 +48,11 @@ group :test do
 end
 
 group :test, :development do
+  gem 'sqlite3'
   gem 'byebug', '8.2.2'
 end
 
+group :production do
+  gem 'pg'
+  gem 'rails_12factor'
+end
