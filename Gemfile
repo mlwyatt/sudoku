@@ -25,7 +25,7 @@ gem 'sass-rails', '~> 5.0'
 
 #Polymer for Web Components & associated dependencies
 # gem 'nokogumbo', '1.4.2'
-gem 'polymer-rails', '1.2.4.1'
+# gem 'polymer-rails', '1.2.4.1'
 
 gem 'bower-rails', '~> 0.9.2'
 
