@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root 'static_pages#home'
+  root 'sudoku#show'
 
   get     'sudoku'    => 'sudoku#show'
   get     'sudoku/reset'    => 'sudoku#reset'
