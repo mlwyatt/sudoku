@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root 'sudoku#show'
+  root 'sudoku#redirect_to_board'
 
   get     'sudoku'    => 'sudoku#show'
   get     'sudoku/reset'    => 'sudoku#reset'
