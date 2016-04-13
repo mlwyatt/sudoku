@@ -20,7 +20,7 @@ gem 'haml-rails', '~> 0.5.3'
 gem 'bourbon'
 gem 'sass-rails', '~> 5.0'
 
-# gem 'sprockets-rails', '~> 2.3.3'
+# gem 'sprockets-rails'
 #gem 'autoprefixer-rails', '~> 6.1.0'
 
 #Polymer for Web Components & associated dependencies
