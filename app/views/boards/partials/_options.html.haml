@@ -1,0 +1,30 @@
+.modal-content
+  %table{id: 'mini-table'}
+    %tbody
+      - count = 1
+      - 3.times do |i|
+        %tr
+          - 3. times do |j|
+            %td{id: "cell#{count}", onclick: "manage_selection(#{count})"}
+              = count
+              - count = count + 1
+.section.center
+  = hidden_field_tag :row, @row
+  = hidden_field_tag :col, @col
+  = check_box_tag 'taking', 'notes', false, autocomplete: 'off', id: 'taking_notes'
+  = label_tag 'taking_notes', 'Taking Notes', style: 'font-weight: normal;'
+.modal-footer
+  = link_to 'Cancel', '#', onclick: "closeModal('sudoku')", class: 'right btn-flat'
+  = link_to 'Clear', '#', onclick: "choose_number(#{0})", class: 'right btn-flat'
+  = link_to 'Save Notes', '#', class: 'right btn-flat', style: 'display: none', id:'saving_notes', onclick: 'save_notes()'
+  :javascript
+    $("#taking_notes").change(function(){
+      save = $("#saving_notes")
+      if (save.css('display')=='none'){
+        save.css('display', 'inline');
+        notes = [];
+      }//addStyle doesn't work the way that i think it does
+      else {
+        save.css('display', 'none')
+      }
+    });
