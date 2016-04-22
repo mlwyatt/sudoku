@@ -1,4 +1,4 @@
-- @board.data.each_with_index do |row,row_i|
+- @board.cells.each_with_index do |row,row_i|
   %tr
     - row.each_with_index do |cell,cell_i|
       - if @colored_number && ((cell.class.to_s == 'Fixnum' && @colored_number == cell && cell != 0) || (cell.class.to_s == 'Array' && cell.include?(@colored_number)))
@@ -17,81 +17,81 @@
           %td{id: "row_#{row_i}_col_#{cell_i}", onclick:"list_numbers('#{row_i}','#{cell_i}')", style: 'background-color: #f10;'}
             = cell
           -# columns
-        - elsif (@board.data.collect{|i| i[cell_i]}.count - 1) != (@board.data.collect{|i| i[cell_i]} - [cell]).count
+        - elsif (@board.cells.collect{|i| i[cell_i]}.count - 1) != (@board.cells.collect{|i| i[cell_i]} - [cell]).count
           %td{id: "row_#{row_i}_col_#{cell_i}", onclick:"list_numbers('#{row_i}','#{cell_i}')", style: 'background-color: #f10;'}
             = cell
           -# 3x3 region
         - elsif cell_i % 3 == 0
           - if row_i % 3 == 0 # top left
-            - if @board.data[row_i + 1][cell_i + 1] == cell || @board.data[row_i + 2][cell_i + 1] == cell || @board.data[row_i + 1][cell_i + 2] == cell || @board.data[row_i + 2][cell_i + 2] == cell
+            - if @board.cells[row_i + 1][cell_i + 1] == cell || @board.cells[row_i + 2][cell_i + 1] == cell || @board.cells[row_i + 1][cell_i + 2] == cell || @board.cells[row_i + 2][cell_i + 2] == cell
               %td{id: "row_#{row_i}_col_#{cell_i}", onclick:"list_numbers('#{row_i}','#{cell_i}')", style: 'background-color: #f10;'}
                 = cell
             - else
-              %td{id: "row_#{row_i}_col_#{cell_i}", onclick:"list_numbers('#{row_i}','#{cell_i}')", style: "#{cell != 0 && !defined?(cell.count) && @board.data.flatten(1).count(cell) == 9 ? 'background-color: #1f0' : ''}"}
+              %td{id: "row_#{row_i}_col_#{cell_i}", onclick:"list_numbers('#{row_i}','#{cell_i}')", style: "#{cell != 0 && !defined?(cell.count) && @board.cells.flatten(1).count(cell) == 9 ? 'background-color: #1f0' : ''}"}
                 = cell
           - elsif row_i % 3 == 1 # mid left
-            - if @board.data[row_i + 1][cell_i + 1] == cell || @board.data[row_i - 1][cell_i + 1] == cell || @board.data[row_i + 1][cell_i + 2] == cell || @board.data[row_i - 1][cell_i + 2] == cell
+            - if @board.cells[row_i + 1][cell_i + 1] == cell || @board.cells[row_i - 1][cell_i + 1] == cell || @board.cells[row_i + 1][cell_i + 2] == cell || @board.cells[row_i - 1][cell_i + 2] == cell
               %td{id: "row_#{row_i}_col_#{cell_i}", onclick:"list_numbers('#{row_i}','#{cell_i}')", style: 'background-color: #f10;'}
                 = cell
             - else
-              %td{id: "row_#{row_i}_col_#{cell_i}", onclick:"list_numbers('#{row_i}','#{cell_i}')", style: "#{cell != 0 && !defined?(cell.count) && @board.data.flatten(1).count(cell) == 9 ? 'background-color: #1f0' : ''}"}
+              %td{id: "row_#{row_i}_col_#{cell_i}", onclick:"list_numbers('#{row_i}','#{cell_i}')", style: "#{cell != 0 && !defined?(cell.count) && @board.cells.flatten(1).count(cell) == 9 ? 'background-color: #1f0' : ''}"}
                 = cell
           - elsif row_i % 3 == 2 # bottom left
-            - if @board.data[row_i - 1][cell_i + 1] == cell || @board.data[row_i - 1][cell_i + 2] == cell || @board.data[row_i - 2][cell_i + 1] == cell || @board.data[row_i - 2][cell_i + 2] == cell
+            - if @board.cells[row_i - 1][cell_i + 1] == cell || @board.cells[row_i - 1][cell_i + 2] == cell || @board.cells[row_i - 2][cell_i + 1] == cell || @board.cells[row_i - 2][cell_i + 2] == cell
               %td{id: "row_#{row_i}_col_#{cell_i}", onclick:"list_numbers('#{row_i}','#{cell_i}')", style: 'background-color: #f10;'}
                 = cell
             - else
-              %td{id: "row_#{row_i}_col_#{cell_i}", onclick:"list_numbers('#{row_i}','#{cell_i}')", style: "#{cell != 0 && !defined?(cell.count) && @board.data.flatten(1).count(cell) == 9 ? 'background-color: #1f0' : ''}"}
+              %td{id: "row_#{row_i}_col_#{cell_i}", onclick:"list_numbers('#{row_i}','#{cell_i}')", style: "#{cell != 0 && !defined?(cell.count) && @board.cells.flatten(1).count(cell) == 9 ? 'background-color: #1f0' : ''}"}
                 = cell
         - elsif cell_i % 3 == 1
           - if row_i % 3 == 0 # top mid
-            - if @board.data[row_i + 1][cell_i - 1] == cell || @board.data[row_i + 2][cell_i - 1] == cell || @board.data[row_i + 1][cell_i + 1] == cell || @board.data[row_i + 2][cell_i + 1] == cell
+            - if @board.cells[row_i + 1][cell_i - 1] == cell || @board.cells[row_i + 2][cell_i - 1] == cell || @board.cells[row_i + 1][cell_i + 1] == cell || @board.cells[row_i + 2][cell_i + 1] == cell
               %td{id: "row_#{row_i}_col_#{cell_i}", onclick:"list_numbers('#{row_i}','#{cell_i}')", style: 'background-color: #f10;'}
                 = cell
             - else
-              %td{id: "row_#{row_i}_col_#{cell_i}", onclick:"list_numbers('#{row_i}','#{cell_i}')", style: "#{cell != 0 && !defined?(cell.count) && @board.data.flatten(1).count(cell) == 9 ? 'background-color: #1f0' : ''}"}
+              %td{id: "row_#{row_i}_col_#{cell_i}", onclick:"list_numbers('#{row_i}','#{cell_i}')", style: "#{cell != 0 && !defined?(cell.count) && @board.cells.flatten(1).count(cell) == 9 ? 'background-color: #1f0' : ''}"}
                 = cell
           - elsif row_i % 3 == 1 # mid mid
-            - if @board.data[row_i + 1][cell_i + 1] == cell || @board.data[row_i - 1][cell_i + 1] == cell || @board.data[row_i + 1][cell_i - 1] == cell || @board.data[row_i - 1][cell_i - 1] == cell
+            - if @board.cells[row_i + 1][cell_i + 1] == cell || @board.cells[row_i - 1][cell_i + 1] == cell || @board.cells[row_i + 1][cell_i - 1] == cell || @board.cells[row_i - 1][cell_i - 1] == cell
               %td{id: "row_#{row_i}_col_#{cell_i}", onclick:"list_numbers('#{row_i}','#{cell_i}')", style: 'background-color: #f10;'}
                 = cell
             - else
-              %td{id: "row_#{row_i}_col_#{cell_i}", onclick:"list_numbers('#{row_i}','#{cell_i}')", style: "#{cell != 0 && !defined?(cell.count) && @board.data.flatten(1).count(cell) == 9 ? 'background-color: #1f0' : ''}"}
+              %td{id: "row_#{row_i}_col_#{cell_i}", onclick:"list_numbers('#{row_i}','#{cell_i}')", style: "#{cell != 0 && !defined?(cell.count) && @board.cells.flatten(1).count(cell) == 9 ? 'background-color: #1f0' : ''}"}
                 = cell
           - elsif row_i % 3 == 2 # bottom mid
-            - if @board.data[row_i - 1][cell_i - 1] == cell || @board.data[row_i - 2][cell_i - 1] == cell || @board.data[row_i - 1][cell_i + 1] == cell || @board.data[row_i - 2][cell_i + 1] == cell
+            - if @board.cells[row_i - 1][cell_i - 1] == cell || @board.cells[row_i - 2][cell_i - 1] == cell || @board.cells[row_i - 1][cell_i + 1] == cell || @board.cells[row_i - 2][cell_i + 1] == cell
               %td{id: "row_#{row_i}_col_#{cell_i}", onclick:"list_numbers('#{row_i}','#{cell_i}')", style: 'background-color: #f10;'}
                 = cell
             - else
-              %td{id: "row_#{row_i}_col_#{cell_i}", onclick:"list_numbers('#{row_i}','#{cell_i}')", style: "#{cell != 0 && !defined?(cell.count) && @board.data.flatten(1).count(cell) == 9 ? 'background-color: #1f0' : ''}"}
+              %td{id: "row_#{row_i}_col_#{cell_i}", onclick:"list_numbers('#{row_i}','#{cell_i}')", style: "#{cell != 0 && !defined?(cell.count) && @board.cells.flatten(1).count(cell) == 9 ? 'background-color: #1f0' : ''}"}
                 = cell
         - elsif cell_i % 3 == 2
           - if row_i % 3 == 0 # top right
-            - if @board.data[row_i + 1][cell_i - 1] == cell || @board.data[row_i + 1][cell_i - 2] == cell || @board.data[row_i + 2][cell_i - 1] == cell || @board.data[row_i + 2][cell_i - 2] == cell
+            - if @board.cells[row_i + 1][cell_i - 1] == cell || @board.cells[row_i + 1][cell_i - 2] == cell || @board.cells[row_i + 2][cell_i - 1] == cell || @board.cells[row_i + 2][cell_i - 2] == cell
               %td{id: "row_#{row_i}_col_#{cell_i}", onclick:"list_numbers('#{row_i}','#{cell_i}')", style: 'background-color: #f10;'}
                 = cell
             - else
-              %td{id: "row_#{row_i}_col_#{cell_i}", onclick:"list_numbers('#{row_i}','#{cell_i}')", style: "#{cell != 0 && !defined?(cell.count) && @board.data.flatten(1).count(cell) == 9 ? 'background-color: #1f0' : ''}"}
+              %td{id: "row_#{row_i}_col_#{cell_i}", onclick:"list_numbers('#{row_i}','#{cell_i}')", style: "#{cell != 0 && !defined?(cell.count) && @board.cells.flatten(1).count(cell) == 9 ? 'background-color: #1f0' : ''}"}
                 = cell
           - elsif row_i % 3 == 1 # mid right
-            - if @board.data[row_i - 1][cell_i - 1] == cell || @board.data[row_i - 1][cell_i - 2] == cell || @board.data[row_i + 1][cell_i - 1] == cell || @board.data[row_i + 1][cell_i - 2] == cell
+            - if @board.cells[row_i - 1][cell_i - 1] == cell || @board.cells[row_i - 1][cell_i - 2] == cell || @board.cells[row_i + 1][cell_i - 1] == cell || @board.cells[row_i + 1][cell_i - 2] == cell
               %td{id: "row_#{row_i}_col_#{cell_i}", onclick:"list_numbers('#{row_i}','#{cell_i}')", style: 'background-color: #f10;'}
                 = cell
             - else
-              %td{id: "row_#{row_i}_col_#{cell_i}", onclick:"list_numbers('#{row_i}','#{cell_i}')", style: "#{cell != 0 && !defined?(cell.count) && @board.data.flatten(1).count(cell) == 9 ? 'background-color: #1f0' : ''}"}
+              %td{id: "row_#{row_i}_col_#{cell_i}", onclick:"list_numbers('#{row_i}','#{cell_i}')", style: "#{cell != 0 && !defined?(cell.count) && @board.cells.flatten(1).count(cell) == 9 ? 'background-color: #1f0' : ''}"}
                 = cell
           - elsif row_i % 3 == 2 # bottom right
-            - if @board.data[row_i - 1][cell_i - 1] == cell || @board.data[row_i - 1][cell_i - 2] == cell || @board.data[row_i - 2][cell_i - 1] == cell || @board.data[row_i - 2][cell_i - 2] == cell
+            - if @board.cells[row_i - 1][cell_i - 1] == cell || @board.cells[row_i - 1][cell_i - 2] == cell || @board.cells[row_i - 2][cell_i - 1] == cell || @board.cells[row_i - 2][cell_i - 2] == cell
               %td{id: "row_#{row_i}_col_#{cell_i}", onclick:"list_numbers('#{row_i}','#{cell_i}')", style: 'background-color: #f10;'}
                 = cell
             - else
-              %td{id: "row_#{row_i}_col_#{cell_i}", onclick:"list_numbers('#{row_i}','#{cell_i}')", style: "#{cell != 0 && !defined?(cell.count) && @board.data.flatten(1).count(cell) == 9 ? 'background-color: #1f0' : ''}"}
+              %td{id: "row_#{row_i}_col_#{cell_i}", onclick:"list_numbers('#{row_i}','#{cell_i}')", style: "#{cell != 0 && !defined?(cell.count) && @board.cells.flatten(1).count(cell) == 9 ? 'background-color: #1f0' : ''}"}
                 = cell
         - else
-          %td{id: "row_#{row_i}_col_#{cell_i}", onclick:"list_numbers('#{row_i}','#{cell_i}')", style: "#{cell != 0 && !defined?(cell.count) && @board.data.flatten(1).count(cell) == 9 ? 'background-color: #1f0' : ''}"}
+          %td{id: "row_#{row_i}_col_#{cell_i}", onclick:"list_numbers('#{row_i}','#{cell_i}')", style: "#{cell != 0 && !defined?(cell.count) && @board.cells.flatten(1).count(cell) == 9 ? 'background-color: #1f0' : ''}"}
             = cell
       - else
-        %td{id: "row_#{row_i}_col_#{cell_i}", onclick:"list_numbers('#{row_i}','#{cell_i}')", style: "#{cell != 0 && !defined?(cell.count) && @board.data.flatten(1).count(cell) == 9 ? 'background-color: #1f0' : ''}"}
+        %td{id: "row_#{row_i}_col_#{cell_i}", onclick:"list_numbers('#{row_i}','#{cell_i}')", style: "#{cell != 0 && !defined?(cell.count) && @board.cells.flatten(1).count(cell) == 9 ? 'background-color: #1f0' : ''}"}
           - if cell == 0
             = '&nbsp;&nbsp;&nbsp;'.html_safe
           - elsif defined?(cell.count)

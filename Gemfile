@@ -36,6 +36,7 @@ group :development do
   gem 'rvm-capistrano', '1.5.6'
   gem 'sitemap_generator', '5.1.0'
   #gem 'better_errors', '2.1.1'
+  gem 'quiet_assets', '1.0.2'
 end
 
 group :test do

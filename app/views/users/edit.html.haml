@@ -1,0 +1,9 @@
+- provide(:title, 'Edit user')
+- provide(:button_text, 'Save changes')
+%h1 Update your profile
+.row
+  .col.s6.offset-s3
+    = render 'form'
+    .gravatar_edit
+      = gravatar_for @user
+      = link_to 'http://gravatar.com/emails', 'Change', target: '_blank'

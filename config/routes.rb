@@ -1,15 +1,21 @@
 Rails.application.routes.draw do
 
-  root 'sudoku#redirect_to_board'
+  # root 'sudoku#redirect_to_board'
 
   get     'sudoku'    => 'sudoku#show'
-  get     'sudoku/reset'    => 'sudoku#reset'
-  get 'sudoku/options/:row/:col' => 'sudoku#options', as: :show_options
-  match 'sudoku/:number/add' => 'sudoku#add', via: [:get,:post], as: :add_number
-  match 'sudoku/:colored_number/color' => 'sudoku#color_number', via: :get, as: :color_number
-  match 'sudoku/:notes/notes' => 'sudoku#save_notes', via: [:get,:post], as: :save_notes
-  get     'login'     => 'sessions#new'
-  post    'login'     => 'sessions#create'
 
-  resource :boards
+
+  match 'sudoku/:notes/notes' => 'sudoku#save_notes', via: [:get,:post], as: :save_notes
+  get   'signup' => 'users#new'
+  get   'login'  => 'sessions#new'
+  post  'login'  => 'sessions#create'
+
+  resources :users
+  resources :boards do
+    match 'color/:colored_number' => 'boards#color_number', via: :get, as: :color_number
+    get   'reset'    => 'boards#reset'
+    get   'options/:row/:col' => 'boards#options', as: :show_options
+    match 'add/:number' => 'boards#add', via: [:get,:post], as: :add_number
+    match 'notes/:notes/' => 'boards#save_notes', via: [:get,:post], as: :save_notes
+  end
 end

@@ -1,9 +1,13 @@
 class BoardsController < ApplicationController
-  before_action :force_trailing_slash#, only: :show
-  before_action :set_board, only: :show
-  before_action :get_board, only: [:add,:options,:color_number,:save_notes]
+  before_action :logged_in_user
+  before_action :force_trailing_slash, only: :show
+  before_action :get_board, only: [:show,:add,:options,:color_number,:save_notes,:reset]
 
   def show
+    unless @board.user == current_user
+      flash[:danger] = 'That is not your sudoku board! Creating a new board.'
+      redirect_to new_board_url
+    end
   end
 
   def color_number
@@ -19,34 +23,28 @@ class BoardsController < ApplicationController
   end
 
   def new
-    @board = Board.new
+    @board = current_user.boards.new
     reset_board
+    redirect_to board_url(@board)
   end
 
   def add
     # debugger
-    @board.data[params[:row].to_i][params[:col].to_i] = params[:number].to_i
+    @board.cells[params[:row].to_i][params[:col].to_i] = params[:number].to_i
     @board.save
     render(partial: 'boards/partials/show', layout: false)
   end
 
   def save_notes
     # debugger
-    @board.data[params[:row].to_i][params[:col].to_i] = params[:notes].split(',').map(&:to_i)
+    @board.cells[params[:row].to_i][params[:col].to_i] = params[:notes].split(',').map(&:to_i)
     @board.save
     render(partial: 'boards/partials/show', layout: false)
   end
 
   def get_board
-    @board = Board.find(params[:id])
-  end
-
-
-
-  def set_board
     # debugger
-    @board = session[:board]
-    reset_board if @board.nil?
+    @board = Board.find(params[:id] || params[:board_id])
   end
 
   def reset
@@ -57,7 +55,7 @@ class BoardsController < ApplicationController
   private
 
   def reset_board
-    @board.data = [[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0]]
+    @board.cells = [[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0]]
     @board.save
   end
 

@@ -9,9 +9,11 @@ function list_numbers(row,col){
 }
 
 function choose_number(number){
+    var data = {'row': $('input[name="row"]').val(), 'col': $('input[name="col"]').val()};
     $.ajax({
-        url: number + '/add',
+        url: 'add/' + number,
         type: 'post',
+        data: data,
         success: function(data) {
             $("#full-table").html(data);
             closeModal('sudoku');
@@ -30,7 +32,7 @@ function reset(){
 
 function highlight_number(number){
     $.ajax({
-        url: number + '/color',
+        url: 'color/' + number,
         success: function(data) {
             //console.log(data);
             $("#full-table").html(data);
@@ -57,9 +59,11 @@ function change_selection(number) {
 }
 
 function save_notes(){
+    var data = {'row': $('input[name="row"]').val(), 'col': $('input[name="col"]').val()};
     $.ajax({
-        url: notes + '/notes',
+        url: 'notes/' + notes,
         type: 'post',
+        data: data,
         success: function(data) {
             $("#full-table").html(data);
             closeModal('sudoku');
