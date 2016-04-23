@@ -12,8 +12,7 @@ class SessionsController < ApplicationController
         params[:session][:remember_me] == '1' ? remember(@user) : forget(@user)
         redirect_back_or @user
       else
-        message =  'Account not activated. Check your email for the activation link.'
-        flash[:warning] = message
+        flash[:warning] =  'Account not activated. Check your email for the activation link.'
         redirect_to root_url
       end
     else
@@ -25,6 +24,6 @@ class SessionsController < ApplicationController
 
   def destroy
     log_out if logged_in?
-    redirect_to root_path
+    render 'new'
   end
 end

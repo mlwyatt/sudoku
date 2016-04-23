@@ -18,6 +18,9 @@
         <span class="brand-logo" style="margin-left: 8px">
           <%= page_header(yield(:header)) %>
         </span>
+        <% if logged_in? %>
+        <%= link_to 'Logout', logout_path, class: 'right', style: 'padding-right: 3%;' %>
+        <% end %>
       </div>
   </nav>
     <div main style="overflow-y:scroll">

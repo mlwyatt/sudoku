@@ -5,7 +5,6 @@ class BoardsController < ApplicationController
 
   def index
     @boards = current_user.boards
-    # redirect_to new_board_url if @boards.count == 0
   end
 
   def destroy

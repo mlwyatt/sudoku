@@ -47,6 +47,7 @@ module SessionsHelper
     forget(current_user)
     session.delete(:user_id)
     @current_user=nil
+    flash[:success] = 'You have been logged out.'
   end
 
   # Redirects to stored location (or to the default)
