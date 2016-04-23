@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root 'sessions#new'
+  root 'boards#index'
 
   get     'sudoku'    => 'sudoku#show'
 
