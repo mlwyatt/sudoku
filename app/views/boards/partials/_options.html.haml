@@ -16,7 +16,7 @@
 .modal-footer
   = link_to 'Cancel', '#', onclick: "closeModal('sudoku')", class: 'right btn-flat'
   = link_to 'Clear', '#', onclick: "choose_number(#{0})", class: 'right btn-flat'
-  = link_to 'Save Notes', '#', class: 'right btn-flat', style: 'display: none', id:'saving_notes', onclick: 'save_notes()'
+  = link_to 'Save Notes', '#', class: 'right btn-flat', style: 'display: none', id:'saving_notes', onclick: 'save_notes()', remote: true
   :javascript
     $("#taking_notes").change(function(){
       save = $("#saving_notes")
