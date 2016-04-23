@@ -5,7 +5,6 @@ Rails.application.routes.draw do
   get     'sudoku'    => 'sudoku#show'
 
 
-  match 'sudoku/:notes/notes' => 'sudoku#save_notes', via: [:get,:post], as: :save_notes
   get   'signup' => 'users#new'
   get   'login'  => 'sessions#new'
   post  'login'  => 'sessions#create'
