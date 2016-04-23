@@ -7,6 +7,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'faker', '1.4.2'
 gem 'will_paginate', '3.0.7'
 
+# gem 'materialize-sass'
 gem 'responders', '2.1.1'
 
 gem 'jquery-rails', '4.0.5'

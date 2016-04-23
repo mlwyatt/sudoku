@@ -5,3 +5,5 @@
       %h1
         = gravatar_for @user, { size: 50 }
         = @user.name
+      .section
+        = link_to 'Sudoku', boards_path, class: 'btn btn-flat'

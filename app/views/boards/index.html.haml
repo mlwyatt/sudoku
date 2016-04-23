@@ -1,0 +1,26 @@
+- if @boards.count == 0
+  You don't have any sudoku boards
+- else
+  .section
+  - @boards.each do |board|
+    .row
+      .col.s2
+        = link_to 'Edit', board_path(board), class: 'btn btn-flat'
+      .col.s8
+        - if board.cells.flatten.count(0) == 81
+          %span{style: 'text-align: center;'}
+            This board is empty
+        - else
+          %table.bordered
+            %tbody.sudoku-board
+              - board.cells.each do |row|
+                %tr
+                  - row.each do |cell|
+                    %td
+                      = "#{cell == 0 || defined?(cell.count) ? '&nbsp;' : cell}".html_safe
+      .col.s2
+        = link_to 'delete', board_path(board), class: 'btn btn-flat', method: :delete, data: { confirm: 'You sure?' }
+    %hr
+.fixed-action-btn{ style: 'bottom:45px; right:24px;' }
+  = link_to '<i class="material-icons">add</i>'.html_safe, new_board_path, class: 'btn-floating btn-large'
+  %span.fab-tip New sudoku

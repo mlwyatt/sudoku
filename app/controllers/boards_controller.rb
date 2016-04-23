@@ -1,7 +1,17 @@
 class BoardsController < ApplicationController
   before_action :logged_in_user
-  before_action :force_trailing_slash, only: :show
-  before_action :get_board, only: [:show,:add,:options,:color_number,:save_notes,:reset]
+  before_action :force_trailing_slash, only: [:show, :index]
+  before_action :get_board, only: [:show,:add,:options,:color_number,:save_notes,:reset,:destroy]
+
+  def index
+    @boards = current_user.boards
+    # redirect_to new_board_url if @boards.count == 0
+  end
+
+  def destroy
+    @board.delete
+    redirect_to boards_url
+  end
 
   def show
     unless @board.user == current_user

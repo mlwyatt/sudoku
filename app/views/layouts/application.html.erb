@@ -21,6 +21,15 @@
       </div>
   </nav>
     <div main style="overflow-y:scroll">
+      <noscript>
+        You must enable javascript to use this site properly.
+      </noscript>
+        <% flash.each do |key,value| %>
+
+          <script type="text/javascript">
+            Materialize.toast('<%= value %>', 4000, '<%= 'bad' if key == 'danger' %><%= 'good' if key == 'success' %>');
+          </script>
+        <% end %>
       <%= yield %>
     </div>
   </body>

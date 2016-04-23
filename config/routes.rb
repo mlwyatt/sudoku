@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  # root 'sudoku#redirect_to_board'
+  root 'sessions#new'
 
   get     'sudoku'    => 'sudoku#show'
 
@@ -18,4 +18,6 @@ Rails.application.routes.draw do
     match 'add/:number' => 'boards#add', via: [:get,:post], as: :add_number
     match 'notes/:notes/' => 'boards#save_notes', via: [:get,:post], as: :save_notes
   end
+  resources :account_activations, only: [:edit]
+  resources :password_resets,     only: [:edit, :create, :new, :update]
 end
