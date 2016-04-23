@@ -1,7 +1,10 @@
 - provide(:title, 'Sudoku')
 .container
   %h3 Sudoku Board
+  = link_to 'Your Sudoku boards', boards_path, class: 'btn-flat'
   = link_to 'Reset Board', '#', class: 'btn-flat', onclick: 'reset()'
+  = link_to 'Clear Coloring', '#', class: 'btn-flat', onclick: "highlight_number('#{0}')"
+  .section
   = link_to '1', '#', class: 'btn-flat', onclick: "highlight_number('#{1}')"
   = link_to '2', '#', class: 'btn-flat', onclick: "highlight_number('#{2}')"
   = link_to '3', '#', class: 'btn-flat', onclick: "highlight_number('#{3}')"
@@ -11,9 +14,8 @@
   = link_to '7', '#', class: 'btn-flat', onclick: "highlight_number('#{7}')"
   = link_to '8', '#', class: 'btn-flat', onclick: "highlight_number('#{8}')"
   = link_to '9', '#', class: 'btn-flat', onclick: "highlight_number('#{9}')"
-  = link_to 'Clear', '#', class: 'btn-flat', onclick: "highlight_number('#{0}')"
   .section
-  %table.centered.bordered.s2{id: 'full-table'}
+  %table.centered.bordered{id: 'full-table'}
     %tbody.sudoku-board
       = render 'boards/partials/show'
   .section
