@@ -5,7 +5,7 @@
       - 3.times do |i|
         %tr
           - 3. times do |j|
-            %td{id: "cell#{count}", onclick: "manage_selection(#{count})"}
+            %td.allow-hover{id: "cell#{count}", onclick: "manage_selection(#{count})"}
               = count
               - count = count + 1
 .section.center

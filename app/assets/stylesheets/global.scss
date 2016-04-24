@@ -49,22 +49,13 @@ tr:nth-child(even) td:nth-child(even)
 {
   background-color: #eee;
 }
-
-tr:nth-child(odd) td:nth-child(odd):hover
-{
-  background-color: #aaa
-}
-
-tr:nth-child(even) td:nth-child(even):hover {
-  background-color: #aaa
-}
-
-tr:nth-child(even) td:nth-child(odd):hover {
-  background-color: #aaa
-}
-
-tr:nth-child(odd) td:nth-child(even):hover {
-  background-color: #aaa
+tr:nth-child(odd) td:nth-child(odd).allow-hover,
+tr:nth-child(even) td:nth-child(even).allow-hover,
+tr:nth-child(even) td:nth-child(odd).allow-hover,
+tr:nth-child(odd) td:nth-child(even).allow-hover {
+  &:hover{
+    background-color: #aaa
+  }
 }
 
 td:first-child {

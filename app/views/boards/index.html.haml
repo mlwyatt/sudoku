@@ -16,7 +16,7 @@
               - board.cells.each do |row|
                 %tr
                   - row.each do |cell|
-                    %td
+                    %td{style: ':hover{ background: }'}
                       = "#{cell == 0 || defined?(cell.count) ? '&nbsp;' : cell}".html_safe
       .col.s2
         = link_to 'delete', board_path(board), class: 'btn btn-flat', method: :delete, data: { confirm: 'You sure?' }
