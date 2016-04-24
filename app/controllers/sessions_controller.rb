@@ -24,6 +24,6 @@ class SessionsController < ApplicationController
 
   def destroy
     log_out if logged_in?
-    render 'new'
+    redirect_to login_url
   end
 end

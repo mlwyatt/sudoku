@@ -2,9 +2,6 @@ Rails.application.routes.draw do
 
   root 'boards#index'
 
-  get     'sudoku'    => 'sudoku#show'
-
-
   get   'signup' => 'users#new'
   get   'login'  => 'sessions#new'
   post  'login'  => 'sessions#create'

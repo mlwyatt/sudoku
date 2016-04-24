@@ -1,9 +1,12 @@
 - provide(:title, 'All users')
-%h1 All users
+.row
+  .col.s8.offset-s5
+    %h1 All users
 
 = will_paginate
-
-%ul.users
-  = render @users
+.row
+  .col.s8.offset-s2
+    %ul.users
+      = render @users
 
 = will_paginate
