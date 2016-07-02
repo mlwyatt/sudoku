@@ -1,18 +1,16 @@
 = form_for(@user) do |f|
   .row
-    .input-field.col.s12
+    .input-field.col.m6.s12
       = f.text_field :name
       = f.label :name
-  .row
-    .input-field.col.s12
+    .input-field.col.m6.s12
       = f.email_field :email, type: 'email'
       = f.label :email
   .row
-    .input-field.col.s12
+    .input-field.col.m6.s12
       = f.password_field :password
       = f.label :password
-  .row
-    .input-field.col.s12
+    .input-field.col.m6.s12
       = f.password_field :password_confirmation
       = f.label :password_confirmation
   .row
