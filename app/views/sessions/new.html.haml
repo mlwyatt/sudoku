@@ -1,17 +1,20 @@
 - provide(:title, 'Log in')
 %h4.center Sign in
-.row
-  = form_for(:session, url: login_path) do |f|
-    .col.l8.m10.s12.offset-l2.offset-m1
+= form_for(:session, url: login_path) do |f|
+  .row
+    .col.s8.offset-s2
       .row
         .input-field.col.m6.s12
           = f.label :email
           = f.email_field :email, type: 'email'
-          = f.check_box :remember_me, id: :remember_me
-          = f.label :remember_me, 'Remember me', class: 'checkbox'
         .input-field.col.m6.s12
           = f.label :password
           = f.password_field :password, type: 'password'
+      .row
+        .col.m6.s12
+          = f.check_box :remember_me
+          = f.label :remember_me, 'Remember me'
+        .col.m6.s12
           = link_to '(forgot password)', new_password_reset_path#, class: 'btn-flat'
       .row
         .col.s12
