@@ -33,8 +33,8 @@ gem 'bower-rails', '~> 0.9.2'
 gem 'stathat'
 
 group :development do
-  gem 'capistrano', '2.15.6'
   gem 'rvm-capistrano', '1.5.6'
+  gem 'capistrano', '2.15.6'
   gem 'sitemap_generator', '5.1.0'
   #gem 'better_errors', '2.1.1'
   gem 'quiet_assets', '1.0.2'
