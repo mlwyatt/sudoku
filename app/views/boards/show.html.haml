@@ -4,6 +4,8 @@
   = link_to 'Your Sudoku boards', boards_path, class: 'btn-flat'
   = link_to 'Reset Board', '#', class: 'btn-flat', onclick: 'reset()', remote: true
   = link_to 'Clear Coloring', '#', class: 'btn-flat', onclick: "highlight_number('#{0}')", remote: true
+  = link_to 'Fill Notes', '#', class: 'btn-flat', onclick: 'take_notes();', remote: true
+  = link_to 'Clear Notes', '#', class: 'btn-flat', onclick: 'clear_notes();', remote: true
   .section
   = link_to '1', '#', class: 'btn-flat', onclick: "highlight_number('#{1}')", remote: true
   = link_to '2', '#', class: 'btn-flat', onclick: "highlight_number('#{2}')", remote: true

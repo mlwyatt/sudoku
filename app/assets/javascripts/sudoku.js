@@ -31,13 +31,41 @@ function reset(){
 }
 
 function highlight_number(number){
-    $.ajax({
-        url: 'color/' + number,
-        success: function(data) {
-            //console.log(data);
-            $("#full-table").html(data);
-        }
-    })
+  Materialize.toast('Please wait.',4000,'good');
+  $.ajax({
+    url: 'color/' + number,
+    success: function(data) {
+        //console.log(data);
+      $("#full-table").html(data);
+      Materialize.toast('Finished!',4000,'good');
+    }
+  })
+}
+
+function take_notes() {
+  Materialize.toast('Please wait.',4000,'good');
+  $.ajax({
+    url: 'take_notes',
+    type: 'post',
+    success: function(data) {
+      //console.log(data);
+      $("#full-table").html(data);
+      Materialize.toast('Finished!',4000,'good');
+    }
+  });
+}
+
+function clear_notes() {
+  Materialize.toast('Please wait.',4000,'good');
+  $.ajax({
+    url: 'clear_notes',
+    type: 'post',
+    success: function(data) {
+      //console.log(data);
+      $("#full-table").html(data);
+      Materialize.toast('Finished!',4000,'good');
+    }
+  });
 }
 
 function closeModal(name){
