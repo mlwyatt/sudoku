@@ -30,12 +30,19 @@ function reset(){
     })
 }
 
-function highlight_number(number){
+function clear_highlight() {
+  $('td.blue').removeClass('blue');
+}
+
+function highlight_number(number,link){
+  if ($(link).hasClass('green'))
+    return;
+  $('a.blue').removeClass('blue');
   Materialize.toast('Please wait.',4000,'good');
   $.ajax({
-    url: 'color/' + number,
+    url: 'color/' + number.toString(),
     success: function(data) {
-        //console.log(data);
+      $(link).addClass('blue');
       $("#full-table").html(data);
       Materialize.toast('Finished!',4000,'good');
     }
