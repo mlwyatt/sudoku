@@ -10,6 +10,9 @@
         - if board.cells.flatten.count(0) == 81  || (board.cells.flatten(1).count(1) == 0 && board.cells.flatten(1).count(2) == 0 && board.cells.flatten(1).count(3) == 0 && board.cells.flatten(1).count(4) == 0 && board.cells.flatten(1).count(5) == 0 && board.cells.flatten(1).count(6) == 0 && board.cells.flatten(1).count(7) == 0 && board.cells.flatten(1).count(8) == 0 && board.cells.flatten(1).count(9) == 0)
           %span{style: 'text-align: center;'}
             This board is empty
+        - elsif board.finished?
+          %span{style: 'text-align: center;'}
+            This board is finished
         - else
           %table.bordered
             %tbody.sudoku-board

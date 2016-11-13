@@ -6,15 +6,15 @@
     .col= link_to 'Reset Board', '#', class: 'btn-flat waves-effect', onclick: 'reset(); return false;'
     .col= link_to 'Clear Coloring', '#', class: 'btn-flat waves-effect', onclick: 'clear_highlight(); return false;'
   .row
-    .col= link_to '1', '#', style: 'color: black;', class: "btn-floating waves-effect waves-circle #{@board.cells.flatten(1).count(1) == 9 ? 'green' : 'red'}", onclick: 'highlight_number(1,this); return false;'
-    .col= link_to '2', '#', style: 'color: black;', class: "btn-floating waves-effect waves-circle #{@board.cells.flatten(1).count(2) == 9 ? 'green' : 'red'}", onclick: 'highlight_number(2,this); return false;'
-    .col= link_to '3', '#', style: 'color: black;', class: "btn-floating waves-effect waves-circle #{@board.cells.flatten(1).count(3) == 9 ? 'green' : 'red'}", onclick: 'highlight_number(3,this); return false;'
-    .col= link_to '4', '#', style: 'color: black;', class: "btn-floating waves-effect waves-circle #{@board.cells.flatten(1).count(4) == 9 ? 'green' : 'red'}", onclick: 'highlight_number(4,this); return false;'
-    .col= link_to '5', '#', style: 'color: black;', class: "btn-floating waves-effect waves-circle #{@board.cells.flatten(1).count(5) == 9 ? 'green' : 'red'}", onclick: 'highlight_number(5,this); return false;'
-    .col= link_to '6', '#', style: 'color: black;', class: "btn-floating waves-effect waves-circle #{@board.cells.flatten(1).count(6) == 9 ? 'green' : 'red'}", onclick: 'highlight_number(6,this); return false;'
-    .col= link_to '7', '#', style: 'color: black;', class: "btn-floating waves-effect waves-circle #{@board.cells.flatten(1).count(7) == 9 ? 'green' : 'red'}", onclick: 'highlight_number(7,this); return false;'
-    .col= link_to '8', '#', style: 'color: black;', class: "btn-floating waves-effect waves-circle #{@board.cells.flatten(1).count(8) == 9 ? 'green' : 'red'}", onclick: 'highlight_number(8,this); return false;'
-    .col= link_to '9', '#', style: 'color: black;', class: "btn-floating waves-effect waves-circle #{@board.cells.flatten(1).count(9) == 9 ? 'green' : 'red'}", onclick: 'highlight_number(9,this); return false;'
+    .col= link_to '1', '#', style: 'color: black;', class: "btn-floating waves-effect waves-circle #{@board.number_finished?(1) ? 'green' : 'red'}", onclick: 'highlight_number(1,this); return false;'
+    .col= link_to '2', '#', style: 'color: black;', class: "btn-floating waves-effect waves-circle #{@board.number_finished?(2) ? 'green' : 'red'}", onclick: 'highlight_number(2,this); return false;'
+    .col= link_to '3', '#', style: 'color: black;', class: "btn-floating waves-effect waves-circle #{@board.number_finished?(3) ? 'green' : 'red'}", onclick: 'highlight_number(3,this); return false;'
+    .col= link_to '4', '#', style: 'color: black;', class: "btn-floating waves-effect waves-circle #{@board.number_finished?(4) ? 'green' : 'red'}", onclick: 'highlight_number(4,this); return false;'
+    .col= link_to '5', '#', style: 'color: black;', class: "btn-floating waves-effect waves-circle #{@board.number_finished?(5) ? 'green' : 'red'}", onclick: 'highlight_number(5,this); return false;'
+    .col= link_to '6', '#', style: 'color: black;', class: "btn-floating waves-effect waves-circle #{@board.number_finished?(6) ? 'green' : 'red'}", onclick: 'highlight_number(6,this); return false;'
+    .col= link_to '7', '#', style: 'color: black;', class: "btn-floating waves-effect waves-circle #{@board.number_finished?(7) ? 'green' : 'red'}", onclick: 'highlight_number(7,this); return false;'
+    .col= link_to '8', '#', style: 'color: black;', class: "btn-floating waves-effect waves-circle #{@board.number_finished?(8) ? 'green' : 'red'}", onclick: 'highlight_number(8,this); return false;'
+    .col= link_to '9', '#', style: 'color: black;', class: "btn-floating waves-effect waves-circle #{@board.number_finished?(9) ? 'green' : 'red'}", onclick: 'highlight_number(9,this); return false;'
     .col.s2= link_to 'Fill Notes', '#', class: 'btn-flat', onclick: 'take_notes();', remote: true
     .col.s2= link_to 'Clear Notes', '#', class: 'btn-flat', onclick: 'clear_notes();', remote: true
   .row
