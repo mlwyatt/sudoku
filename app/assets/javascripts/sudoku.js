@@ -31,7 +31,7 @@ function reset(){
 }
 
 function clear_highlight() {
-  $('td.blue').removeClass('blue');
+  $('.blue').removeClass('blue');
 }
 
 function highlight_number(number,link){

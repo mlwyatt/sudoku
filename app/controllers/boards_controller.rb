@@ -20,7 +20,7 @@ class BoardsController < ApplicationController
   end
 
   def color_number
-    @colored_number = params[:colored_number].to_i
+    @colored_number = params[:colored_number].to_i if params[:colored_number].to_i > 0
     render(partial: 'boards/partials/show', layout: false)
   end
 

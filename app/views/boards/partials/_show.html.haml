@@ -1,100 +1,36 @@
 - @board.cells.each_with_index do |row,row_i|
   %tr
     - row.each_with_index do |cell,cell_i|
-      - if @colored_number && ((cell.class.to_s == 'Fixnum' && @colored_number == cell && cell != 0) || (cell.class.to_s == 'Array' && cell.include?(@colored_number)))
-        - if cell.class.to_s == 'Fixnum' && @colored_number == cell
-          %td.allow-hover.blue{id: "row_#{row_i}_col_#{cell_i}", onclick:"list_numbers('#{row_i}','#{cell_i}')"}
+      - if @colored_number && ((cell.is_a?(Fixnum) && @colored_number == cell) || (cell.is_a?(Array) && cell.include?(@colored_number)))
+        - if cell.is_a?(Fixnum)
+          %td.allow-hover.blue{id: "row_#{row_i}_col_#{cell_i}", onclick: "list_numbers('#{row_i}','#{cell_i}')"}
             = cell
-        - else #elsif cell.class.to_s == 'Array' && cell.include?(@colored_number)
-          %td.allow-hover.blue.lighten-2{id: "row_#{row_i}_col_#{cell_i}", onclick:"list_numbers('#{row_i}','#{cell_i}')"}
+        - else
+          %td.allow-hover.blue.lighten-2{id: "row_#{row_i}_col_#{cell_i}", onclick: "list_numbers('#{row_i}','#{cell_i}')"}
             = "<div style='font-size: 8pt;width: auto'>".html_safe
             = "#{cell[0]}#{cell[1]}#{cell[2]}#{'&nbsp;&nbsp;&nbsp;' if cell[0].nil?}<br>".html_safe
             = "#{cell[3]}#{cell[4]}#{cell[5]}#{'&nbsp;&nbsp;&nbsp;' if cell[3].nil?}<br>".html_safe
             = "#{cell[6]}#{cell[7]}#{cell[8]}#{'&nbsp;&nbsp;&nbsp;' if cell[6].nil?}</div>".html_safe
-      - elsif cell != 0 && cell.class.to_s == 'Fixnum'
-        - if (row.count - 1) != (row - [cell]).count
+      - elsif cell != 0 && cell.is_a?(Fixnum)
+        - if row.count(cell) != 1
           -# rows
-          %td.allow-hover.red{id: "row_#{row_i}_col_#{cell_i}", onclick:"list_numbers('#{row_i}','#{cell_i}')"}
+          %td.allow-hover.red{id: "row_#{row_i}_col_#{cell_i}", onclick: "list_numbers('#{row_i}','#{cell_i}')"}
             = cell
+        - elsif @board.cells.map{|i| i[cell_i]}.count(cell) != 1
           -# columns
-        - elsif (@board.cells.collect{|i| i[cell_i]}.count - 1) != (@board.cells.collect{|i| i[cell_i]} - [cell]).count
-          %td.allow-hover.red{id: "row_#{row_i}_col_#{cell_i}", onclick:"list_numbers('#{row_i}','#{cell_i}')"}
+          %td.allow-hover.red{id: "row_#{row_i}_col_#{cell_i}", onclick: "list_numbers('#{row_i}','#{cell_i}')"}
             = cell
-          -# 3x3 region
-        - elsif cell_i % 3 == 0
-          - if row_i % 3 == 0 # top left
-            - if @board.cells[row_i + 1][cell_i + 1] == cell || @board.cells[row_i + 2][cell_i + 1] == cell || @board.cells[row_i + 1][cell_i + 2] == cell || @board.cells[row_i + 2][cell_i + 2] == cell
-              %td.allow-hover.red{id: "row_#{row_i}_col_#{cell_i}", onclick:"list_numbers('#{row_i}','#{cell_i}')"}
-                = cell
-            - else
-              %td.allow-hover{id: "row_#{row_i}_col_#{cell_i}", onclick:"list_numbers('#{row_i}','#{cell_i}')", class: "#{cell != 0 && !defined?(cell.count) && @board.cells.flatten(1).count(cell) == 9 ? 'green' : ''}"}
-                = cell
-          - elsif row_i % 3 == 1 # mid left
-            - if @board.cells[row_i + 1][cell_i + 1] == cell || @board.cells[row_i - 1][cell_i + 1] == cell || @board.cells[row_i + 1][cell_i + 2] == cell || @board.cells[row_i - 1][cell_i + 2] == cell
-              %td.allow-hover.red{id: "row_#{row_i}_col_#{cell_i}", onclick:"list_numbers('#{row_i}','#{cell_i}')"}
-                = cell
-            - else
-              %td.allow-hover{id: "row_#{row_i}_col_#{cell_i}", onclick:"list_numbers('#{row_i}','#{cell_i}')", class: "#{cell != 0 && !defined?(cell.count) && @board.cells.flatten(1).count(cell) == 9 ? 'green' : ''}"}
-                = cell
-          - elsif row_i % 3 == 2 # bottom left
-            - if @board.cells[row_i - 1][cell_i + 1] == cell || @board.cells[row_i - 1][cell_i + 2] == cell || @board.cells[row_i - 2][cell_i + 1] == cell || @board.cells[row_i - 2][cell_i + 2] == cell
-              %td.allow-hover.red{id: "row_#{row_i}_col_#{cell_i}", onclick:"list_numbers('#{row_i}','#{cell_i}')"}
-                = cell
-            - else
-              %td.allow-hover{id: "row_#{row_i}_col_#{cell_i}", onclick:"list_numbers('#{row_i}','#{cell_i}')", class: "#{cell != 0 && !defined?(cell.count) && @board.cells.flatten(1).count(cell) == 9 ? 'green' : ''}"}
-                = cell
-        - elsif cell_i % 3 == 1
-          - if row_i % 3 == 0 # top mid
-            - if @board.cells[row_i + 1][cell_i - 1] == cell || @board.cells[row_i + 2][cell_i - 1] == cell || @board.cells[row_i + 1][cell_i + 1] == cell || @board.cells[row_i + 2][cell_i + 1] == cell
-              %td.allow-hover.red{id: "row_#{row_i}_col_#{cell_i}", onclick:"list_numbers('#{row_i}','#{cell_i}')"}
-                = cell
-            - else
-              %td.allow-hover{id: "row_#{row_i}_col_#{cell_i}", onclick:"list_numbers('#{row_i}','#{cell_i}')", class: "#{cell != 0 && !defined?(cell.count) && @board.cells.flatten(1).count(cell) == 9 ? 'green' : ''}"}
-                = cell
-          - elsif row_i % 3 == 1 # mid mid
-            - if @board.cells[row_i + 1][cell_i + 1] == cell || @board.cells[row_i - 1][cell_i + 1] == cell || @board.cells[row_i + 1][cell_i - 1] == cell || @board.cells[row_i - 1][cell_i - 1] == cell
-              %td.allow-hover.red{id: "row_#{row_i}_col_#{cell_i}", onclick:"list_numbers('#{row_i}','#{cell_i}')"}
-                = cell
-            - else
-              %td.allow-hover{id: "row_#{row_i}_col_#{cell_i}", onclick:"list_numbers('#{row_i}','#{cell_i}')", class: "#{cell != 0 && !defined?(cell.count) && @board.cells.flatten(1).count(cell) == 9 ? 'green' : ''}"}
-                = cell
-          - elsif row_i % 3 == 2 # bottom mid
-            - if @board.cells[row_i - 1][cell_i - 1] == cell || @board.cells[row_i - 2][cell_i - 1] == cell || @board.cells[row_i - 1][cell_i + 1] == cell || @board.cells[row_i - 2][cell_i + 1] == cell
-              %td.allow-hover.red{id: "row_#{row_i}_col_#{cell_i}", onclick:"list_numbers('#{row_i}','#{cell_i}')"}
-                = cell
-            - else
-              %td.allow-hover{id: "row_#{row_i}_col_#{cell_i}", onclick:"list_numbers('#{row_i}','#{cell_i}')", class: "#{cell != 0 && !defined?(cell.count) && @board.cells.flatten(1).count(cell) == 9 ? 'green' : ''}"}
-                = cell
-        - elsif cell_i % 3 == 2
-          - if row_i % 3 == 0 # top right
-            - if @board.cells[row_i + 1][cell_i - 1] == cell || @board.cells[row_i + 1][cell_i - 2] == cell || @board.cells[row_i + 2][cell_i - 1] == cell || @board.cells[row_i + 2][cell_i - 2] == cell
-              %td.allow-hover.red{id: "row_#{row_i}_col_#{cell_i}", onclick:"list_numbers('#{row_i}','#{cell_i}')"}
-                = cell
-            - else
-              %td.allow-hover{id: "row_#{row_i}_col_#{cell_i}", onclick:"list_numbers('#{row_i}','#{cell_i}')", class: "#{cell != 0 && !defined?(cell.count) && @board.cells.flatten(1).count(cell) == 9 ? 'green' : ''}"}
-                = cell
-          - elsif row_i % 3 == 1 # mid right
-            - if @board.cells[row_i - 1][cell_i - 1] == cell || @board.cells[row_i - 1][cell_i - 2] == cell || @board.cells[row_i + 1][cell_i - 1] == cell || @board.cells[row_i + 1][cell_i - 2] == cell
-              %td.allow-hover.red{id: "row_#{row_i}_col_#{cell_i}", onclick:"list_numbers('#{row_i}','#{cell_i}')"}
-                = cell
-            - else
-              %td.allow-hover{id: "row_#{row_i}_col_#{cell_i}", onclick:"list_numbers('#{row_i}','#{cell_i}')", class: "#{cell != 0 && !defined?(cell.count) && @board.cells.flatten(1).count(cell) == 9 ? 'green' : ''}"}
-                = cell
-          - elsif row_i % 3 == 2 # bottom right
-            - if @board.cells[row_i - 1][cell_i - 1] == cell || @board.cells[row_i - 1][cell_i - 2] == cell || @board.cells[row_i - 2][cell_i - 1] == cell || @board.cells[row_i - 2][cell_i - 2] == cell
-              %td.allow-hover.red{id: "row_#{row_i}_col_#{cell_i}", onclick:"list_numbers('#{row_i}','#{cell_i}')"}
-                = cell
-            - else
-              %td.allow-hover{id: "row_#{row_i}_col_#{cell_i}", onclick:"list_numbers('#{row_i}','#{cell_i}')", class: "#{cell != 0 && !defined?(cell.count) && @board.cells.flatten(1).count(cell) == 9 ? 'green' : ''}"}
-                = cell
+        - elsif @board.region_double(row_i,cell_i).count(cell) > 1
+          %td.allow-hover.red.region-has-more{id: "row_#{row_i}_col_#{cell_i}", onclick: "list_numbers('#{row_i}','#{cell_i}')"}
+            = cell
         - else
-          %td.allow-hover{id: "row_#{row_i}_col_#{cell_i}", onclick:"list_numbers('#{row_i}','#{cell_i}')", class: "#{cell != 0 && !defined?(cell.count) && @board.cells.flatten(1).count(cell) == 9 ? 'green' : ''}"}
+          %td.allow-hover{id: "row_#{row_i}_col_#{cell_i}", onclick: "list_numbers('#{row_i}','#{cell_i}')", class: "#{@board.number_finished?(cell) ? 'green' : ''}"}
             = cell
       - else
-        %td.allow-hover{id: "row_#{row_i}_col_#{cell_i}", onclick:"list_numbers('#{row_i}','#{cell_i}')", class: "#{cell != 0 && !defined?(cell.count) && @board.cells.flatten(1).count(cell) == 9 ? 'green' : ''}"}
+        %td.allow-hover{id: "row_#{row_i}_col_#{cell_i}", onclick: "list_numbers('#{row_i}','#{cell_i}')"}
           - if cell == 0
             = '&nbsp;&nbsp;&nbsp;'.html_safe
-          - elsif defined?(cell.count)
+          - elsif cell.is_a?(Array)
             = "<div style='font-size: 8pt;width: auto'>".html_safe
             = "#{cell[0]}#{cell[1]}#{cell[2]}#{'&nbsp;&nbsp;&nbsp;' if cell[0].nil?}<br>".html_safe
             = "#{cell[3]}#{cell[4]}#{cell[5]}#{'&nbsp;&nbsp;&nbsp;' if cell[3].nil?}<br>".html_safe
