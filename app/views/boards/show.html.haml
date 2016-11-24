@@ -4,7 +4,6 @@
   .row
     .col= link_to 'Your Sudoku boards', boards_path, class: 'btn-flat waves-effect'
     .col= link_to 'Reset Board', '#', class: 'btn-flat waves-effect', onclick: 'reset(); return false;'
-    .col= link_to 'Clear Coloring', '#', class: 'btn-flat waves-effect', onclick: 'clear_highlight(); return false;'
   .row
     .col= link_to '1', '#', style: 'color: black;', class: "btn-floating waves-effect waves-circle #{@board.number_finished?(1) ? 'green' : 'red'}", onclick: 'highlight_number(1,this); return false;'
     .col= link_to '2', '#', style: 'color: black;', class: "btn-floating waves-effect waves-circle #{@board.number_finished?(2) ? 'green' : 'red'}", onclick: 'highlight_number(2,this); return false;'

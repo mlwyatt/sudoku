@@ -16,6 +16,8 @@ function choose_number(number){
         data: data,
         success: function(data) {
             $("#full-table").html(data);
+            $('td:contains(' + highlighted + ')').not('[id^="cell"]').addClass('blue');
+            $('td:contains(' + highlighted + '):has(div)').not('[id^="cell"]').addClass('lighten-2');
             closeModal('sudoku');
         }
     })
@@ -32,21 +34,22 @@ function reset(){
 
 function clear_highlight() {
   $('.blue').removeClass('blue');
+  highlighted = null;
 }
 
+var highlighted = 0;
 function highlight_number(number,link){
   if ($(link).hasClass('green'))
     return;
-  $('a.blue').removeClass('blue');
-  Materialize.toast('Please wait.',4000,'good');
-  $.ajax({
-    url: 'color/' + number.toString(),
-    success: function(data) {
-      $(link).addClass('blue');
-      $("#full-table").html(data);
-      Materialize.toast('Finished!',4000,'good');
-    }
-  })
+  if (highlighted == number)
+    clear_highlight();
+  else {
+    $('a.blue').removeClass('blue');
+    $(link).addClass('blue');
+    highlighted = number;
+    $('td:contains(' + highlighted + ')').not('[id^="cell"]').addClass('blue');
+    $('td:contains(' + highlighted + '):has(div)').not('[id^="cell"]').addClass('lighten-2');
+  }
 }
 
 function take_notes() {
@@ -57,6 +60,8 @@ function take_notes() {
     success: function(data) {
       //console.log(data);
       $("#full-table").html(data);
+      $('td:contains(' + highlighted + ')').not('[id^="cell"]').addClass('blue');
+      $('td:contains(' + highlighted + '):has(div)').not('[id^="cell"]').addClass('lighten-2');
       Materialize.toast('Finished!',4000,'good');
     }
   });
@@ -70,6 +75,7 @@ function clear_notes() {
     success: function(data) {
       //console.log(data);
       $("#full-table").html(data);
+      $('td:contains(' + highlighted + ')').not('[id^="cell"]').addClass('blue');
       Materialize.toast('Finished!',4000,'good');
     }
   });
@@ -102,6 +108,8 @@ function save_notes(){
         success: function(data) {
             $("#full-table").html(data);
             closeModal('sudoku');
+            $('td:contains(' + highlighted + ')').not('[id^="cell"]').addClass('blue');
+            $('td:contains(' + highlighted + '):has(div)').not('[id^="cell"]').addClass('lighten-2');
         }
     })
 }

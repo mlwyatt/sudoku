@@ -28,6 +28,7 @@ class BoardsController < ApplicationController
     # debugger
     @row = params[:row]
     @col = params[:col]
+    @cell = @board.cells[@row.to_i][@col.to_i]
     render(partial: 'boards/partials/options', layout: false)
   end
 
