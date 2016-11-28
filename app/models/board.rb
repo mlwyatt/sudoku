@@ -9,16 +9,16 @@ class Board < ActiveRecord::Base
     # returns [] of length 9 with values in given region
     return_cells = []
     cells = self.cells
-    row = (big_cell / size) * size # big_cell/3 *3
+    row = (big_cell / self.size) * self.size # big_cell/3 *3
                              # 0 | 0 | 0
                              # 3 | 3 | 3
                              # 6 | 6 | 6
-    col = (big_cell % size) * size # big_cell%3 *3
+    col = (big_cell % self.size) * self.size # big_cell%3 *3
                              # 0 | 3 | 6
                              # 0 | 3 | 6
                              # 0 | 3 | 6
-    size.times do |i|
-      size.times do |j|
+    self.size.times do |i|
+      self.size.times do |j|
       return_cells << cells[row + i][col + j]
       end
     end
@@ -26,11 +26,11 @@ class Board < ActiveRecord::Base
     end
 
   def region_double(row,col)
-    return region_single(size * (row / size) + (col / size))
+    return region_single(self.size * (row / self.size) + (col / self.size))
   end
 
   def finished?
-    sq_size = size * size
+    sq_size = self.size * self.size
     finished = true
     sq_size.times do |i| # counts for 1-9 shows 9 times each
       break unless finished
@@ -55,7 +55,7 @@ class Board < ActiveRecord::Base
   end
 
   def number_finished?(number)
-    sq_size = size * size
+    sq_size = self.size * self.size
     finished = true
     finished = finished && self.cells.flatten(1).count(number) == sq_size
     return finished unless finished
