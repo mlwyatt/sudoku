@@ -36,17 +36,14 @@ class Board < ActiveRecord::Base
       break unless finished
       finished = finished && self.cells.flatten(1).count(i+1) == sq_size
     end
-    return finished unless finished
     sq_size.times do |i| # each row is 1-9
       break unless finished
       finished = finished && self.cells[i].sort == (1..sq_size).to_a
     end
-    return finished unless finished
     sq_size.times do |i| # each col is 1-9
       break unless finished
       finished = finished && self.cells.map{|row| row[i]}.sort == (1..sq_size).to_a
     end
-    return finished unless finished
     sq_size.times do |i| # each 3x3 has 1-9
       break unless finished
       finished = finished && self.region_single(i).sort == (1..sq_size).to_a
