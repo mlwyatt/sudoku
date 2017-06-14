@@ -1,3 +1,18 @@
+$(document).ready(function(){
+  $('.highlight-number').on('click',function(e){
+    e.preventDefault();
+    highlight_number(Number($(this).text()),this);
+  });
+  $('.take-notes').on('click',function(e){
+    e.preventDefault();
+    take_notes();
+  });
+  $('.clear-notes').on('click',function(e){
+    e.preventDefault();
+    clear_notes();
+  });
+});
+
 function list_numbers(row,col){
     $.ajax({
         url: 'options/' + row + '/' + col,
@@ -32,17 +47,21 @@ function reset(){
     })
 }
 
-function clear_highlight() {
+function clear_highlight(nullify) {
   $('.blue').removeClass('blue');
-  highlighted = null;
+  if (nullify)
+    highlighted = null;
 }
 
 var highlighted = 0;
 function highlight_number(number,link){
   if ($(link).hasClass('green'))
     return;
-  if (highlighted == number)
-    clear_highlight();
+  clear_highlight(highlighted != number);
+  if (highlighted == number) {
+    highlighted = null
+    return;
+  }
   else {
     $('a.blue').removeClass('blue');
     $(link).addClass('blue');
@@ -58,7 +77,6 @@ function take_notes() {
     url: 'take_notes',
     type: 'post',
     success: function(data) {
-      //console.log(data);
       $("#full-table").html(data);
       $('td:contains(' + highlighted + ')').not('[id^="cell"]').addClass('blue');
       $('td:contains(' + highlighted + '):has(div)').not('[id^="cell"]').addClass('lighten-2');

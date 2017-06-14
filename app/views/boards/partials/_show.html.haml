@@ -1,39 +1,29 @@
-- @board.cells.each_with_index do |row,row_i|
+- sq_size = @board.sq_size
+- green = {}
+- red = {}
+- cells = @board.cells
+- sq_size.times do |row|
+  - green[row+1] = @board.number_finished?(row+1)
+  - red[row+1] = @board.number_bad?(row+1)
+- sq_size.times do |r|
   %tr
-    - row.each_with_index do |cell,cell_i|
-      - if @colored_number && ((cell.is_a?(Fixnum) && @colored_number == cell) || (cell.is_a?(Array) && cell.include?(@colored_number)))
-        - if cell.is_a?(Fixnum)
-          %td.allow-hover.blue{id: "row_#{row_i}_col_#{cell_i}", onclick: "list_numbers('#{row_i}','#{cell_i}')"}
-            = cell
+    - sq_size.times do |c|
+      - cell = cells.find_by(row: r, column: c)
+      - classes = []
+      - classes << 'green' if green[cell.value]
+      - classes << 'red' if red[cell.value]
+      - if @colored_number.to_i > 0
+        - classes << 'blue' if cell.value == @colored_number
+        - classes << 'blue lighten-2' if cell.notes.include?(@colored_number)
+      %td.allow-hover{class: "#{classes[0]}", id: "row_#{r}_col_#{c}", onclick: "list_numbers('#{r}','#{c}')"}
+        - if cell.value.to_i > 0
+          = cell.value
+        - elsif cell.notes.size > 0
+          - notes = cell.notes
+          - notes = notes+[nil]*(sq_size-notes.size) if notes.size < sq_size
+          = "<div style='font-size: 8pt;width: auto'>".html_safe
+          = "#{notes[0..2].join}#{'&nbsp;'*notes[0..2].count(nil)}<br>".html_safe
+          = "#{notes[3..5].join}#{'&nbsp;'*notes[3..5].count(nil)}<br>".html_safe
+          = "#{notes[6..8].join}#{'&nbsp;'*notes[6..8].count(nil)}</div>".html_safe
         - else
-          %td.allow-hover.blue.lighten-2{id: "row_#{row_i}_col_#{cell_i}", onclick: "list_numbers('#{row_i}','#{cell_i}')"}
-            = "<div style='font-size: 8pt;width: auto'>".html_safe
-            = "#{cell[0]}#{cell[1]}#{cell[2]}#{'&nbsp;&nbsp;&nbsp;' if cell[0].nil?}<br>".html_safe
-            = "#{cell[3]}#{cell[4]}#{cell[5]}#{'&nbsp;&nbsp;&nbsp;' if cell[3].nil?}<br>".html_safe
-            = "#{cell[6]}#{cell[7]}#{cell[8]}#{'&nbsp;&nbsp;&nbsp;' if cell[6].nil?}</div>".html_safe
-      - elsif cell != 0 && cell.is_a?(Fixnum)
-        - if row.count(cell) != 1
-          -# rows
-          %td.allow-hover.red{id: "row_#{row_i}_col_#{cell_i}", onclick: "list_numbers('#{row_i}','#{cell_i}')"}
-            = cell
-        - elsif @board.cells.map{|i| i[cell_i]}.count(cell) != 1
-          -# columns
-          %td.allow-hover.red{id: "row_#{row_i}_col_#{cell_i}", onclick: "list_numbers('#{row_i}','#{cell_i}')"}
-            = cell
-        - elsif @board.region_double(row_i,cell_i).count(cell) > 1
-          %td.allow-hover.red.region-has-more{id: "row_#{row_i}_col_#{cell_i}", onclick: "list_numbers('#{row_i}','#{cell_i}')"}
-            = cell
-        - else
-          %td.allow-hover{id: "row_#{row_i}_col_#{cell_i}", onclick: "list_numbers('#{row_i}','#{cell_i}')", class: "#{@board.number_finished?(cell) ? 'green' : ''}"}
-            = cell
-      - else
-        %td.allow-hover{id: "row_#{row_i}_col_#{cell_i}", onclick: "list_numbers('#{row_i}','#{cell_i}')"}
-          - if cell == 0
-            = '&nbsp;&nbsp;&nbsp;'.html_safe
-          - elsif cell.is_a?(Array)
-            = "<div style='font-size: 8pt;width: auto'>".html_safe
-            = "#{cell[0]}#{cell[1]}#{cell[2]}#{'&nbsp;&nbsp;&nbsp;' if cell[0].nil?}<br>".html_safe
-            = "#{cell[3]}#{cell[4]}#{cell[5]}#{'&nbsp;&nbsp;&nbsp;' if cell[3].nil?}<br>".html_safe
-            = "#{cell[6]}#{cell[7]}#{cell[8]}#{'&nbsp;&nbsp;&nbsp;' if cell[6].nil?}</div>".html_safe
-          - else
-            = cell
+          = ('&nbsp;'*3).html_safe

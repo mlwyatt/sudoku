@@ -11,15 +11,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161114231750) do
+ActiveRecord::Schema.define(version: 20170531234722) do
 
   create_table "boards", force: :cascade do |t|
-    t.string   "cells"
     t.integer  "user_id"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
     t.integer  "size",       default: 3, null: false
   end
+
+  create_table "cells", force: :cascade do |t|
+    t.integer  "board_id"
+    t.integer  "value"
+    t.integer  "row"
+    t.integer  "column"
+    t.integer  "region"
+    t.string   "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "cells", ["board_id"], name: "index_cells_on_board_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "name"

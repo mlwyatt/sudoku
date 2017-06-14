@@ -25,71 +25,49 @@ class BoardsController < ApplicationController
   end
 
   def options
-    # debugger
     @row = params[:row]
     @col = params[:col]
-    @cell = @board.cells[@row.to_i][@col.to_i]
+    @cell = @board.cells.find_by(row: @row.to_i, column: @col.to_i)
     render(partial: 'boards/partials/options', layout: false)
   end
 
   def new
-    @board = current_user.boards.new
+    @board = current_user.boards.create!(size: params[:size] || 3)
     reset_board
     redirect_to board_url(@board)
   end
 
   def add
-    # debugger
-    @board.cells[params[:row].to_i][params[:col].to_i] = params[:number].to_i
-    @board.save
+    @board.cells.find_by(row: params[:row].to_i, column: params[:col].to_i).update_attributes!(value: params[:number].to_i, notes: nil)
     render(partial: 'boards/partials/show', layout: false)
   end
 
   def save_notes
-    # debugger
-    @board.cells[params[:row].to_i][params[:col].to_i] = params[:notes].split(',').map(&:to_i)
-    @board.save
+    @board.cells.find_by(row: params[:row].to_i, column: params[:col].to_i).update_attributes!(value: 0, notes: params[:notes].split(',').map(&:to_i))
     render(partial: 'boards/partials/show', layout: false)
   end
 
   def get_board
-    # debugger
     @board = Board.find(params[:id] || params[:board_id])
   end
 
   def take_notes
-    @board.cells.each_with_index do |row,row_i|
-      row.each_with_index do |col,col_i|
-        notes = (1..9).to_a
-        if col.is_a?(Array) || col == 0
-          notes -= @board.cells.map{|i| i[col_i].is_a?(Array) ? 0 : i[col_i]}
-          notes -= row.map{|i| i.is_a?(Array) ? 0 : i}
-          r_region = row_i / 3
-          c_region = col_i / 3
-          3.times do |i|
-            3.times do |j|
-              next if 3 * r_region + i == row_i && 3 * c_region + j == col_i
-              next if @board.cells[3 * r_region + i][3 * c_region + j].is_a?(Array)
-              notes -= [@board.cells[3 * r_region + i][3 * c_region + j]]
-            end
-          end
-          @board.cells[row_i][col_i] = notes
-        end
+    cells = @board.cells
+    cells.each do |cell|
+      notes = (1..9).to_a
+      if cell.value.to_i == 0
+        notes -= cells.where(row: cell.row).map(&:value)
+        notes -= cells.where(column: cell.column).map(&:value)
+        notes -= cells.where(region: cell.region).map(&:value)
+        cell.notes = notes
       end
     end
-    @board.save
+    @board.save!
     render(partial: 'boards/partials/show', layout: false)
   end
 
   def clear_notes
-    @board.cells.each_with_index do |row,row_i|
-      row.each_with_index do |col,col_i|
-        if col.is_a?(Array)
-          @board.cells[row_i][col_i] = 0
-        end
-      end
-    end
-    @board.save
+    @board.cells.update_all(notes: nil)
     render(partial: 'boards/partials/show', layout: false)
   end
 
@@ -101,8 +79,14 @@ class BoardsController < ApplicationController
   private
 
   def reset_board
-    @board.cells = [[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0]]
-    @board.save
+    size = @board.size
+    sq = size * size
+    sq.times do |r|
+      sq.times do |c|
+        cell = @board.cells.find_or_create_by!(row: r, column: c, region: size*(r/size)+(c/size))
+        cell.update_attributes!(value: 0, notes: nil)
+      end
+    end
   end
 
   def board_params

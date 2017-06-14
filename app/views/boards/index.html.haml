@@ -1,4 +1,4 @@
-- if @boards.count == 0
+- if @boards.size == 0
   You don't have any sudoku boards
 - else
   .section
@@ -7,7 +7,7 @@
       .col.s2
         = link_to 'Edit', board_path(board), class: 'btn btn-flat'
       .col.s8
-        - if board.cells.flatten.count(0) == 81  || (board.cells.flatten(1).count(1) == 0 && board.cells.flatten(1).count(2) == 0 && board.cells.flatten(1).count(3) == 0 && board.cells.flatten(1).count(4) == 0 && board.cells.flatten(1).count(5) == 0 && board.cells.flatten(1).count(6) == 0 && board.cells.flatten(1).count(7) == 0 && board.cells.flatten(1).count(8) == 0 && board.cells.flatten(1).count(9) == 0)
+        - if board.cells.where(value: 0).size == 81  || (board.cells.where(value: 1).size == 0 && board.cells.where(value: 2).size == 0 && board.cells.where(value: 3).size == 0 && board.cells.where(value: 4).size == 0 && board.cells.where(value: 5).size == 0 && board.cells.where(value: 6).size == 0 && board.cells.where(value: 7).size == 0 && board.cells.where(value: 8).size == 0 && board.cells.where(value: 9).size == 0)
           %span{style: 'text-align: center;'}
             This board is empty
         - elsif board.finished?
@@ -16,11 +16,11 @@
         - else
           %table.bordered
             %tbody.sudoku-board
-              - board.cells.each do |row|
+              - board.sq_size.times do |r|
                 %tr
-                  - row.each do |cell|
+                  - board.cells.where(row: r).order(:column).each do |cell|
                     %td{style: ':hover{ background: }'}
-                      = "#{cell == 0 || cell.is_a?(Array) ? '&nbsp;' : cell}".html_safe
+                      = "#{cell.value == 0 || cell.notes.length > 0 ? '&nbsp;' : cell.value}".html_safe
       .col.s2
         = link_to 'delete', board_path(board), class: 'btn btn-flat', method: :delete, data: { confirm: 'You sure?' }
     %hr
