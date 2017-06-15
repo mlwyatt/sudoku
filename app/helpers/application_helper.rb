@@ -17,4 +17,10 @@ module ApplicationHelper
       "#{page_header}"
     end
   end
+
+  def rjr(json, options = {})
+    args = (options || {}).reverse_merge(:status => 200, :layout => false)
+    args[:json] ||= json
+    render args
+  end
 end

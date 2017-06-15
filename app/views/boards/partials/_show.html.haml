@@ -9,21 +9,22 @@
   %tr
     - sq_size.times do |c|
       - cell = cells.find_by(row: r, column: c)
-      - classes = []
-      - classes << 'green' if green[cell.value]
-      - classes << 'red' if red[cell.value]
+      - klass = ''
+      - klass = 'green' if green[cell.value]
+      - klass = 'red' if red[cell.value]
       - if @colored_number.to_i > 0
-        - classes << 'blue' if cell.value == @colored_number
-        - classes << 'blue lighten-2' if cell.notes.include?(@colored_number)
-      %td.allow-hover{class: "#{classes[0]}", id: "row_#{r}_col_#{c}", onclick: "list_numbers('#{r}','#{c}')"}
-        - if cell.value.to_i > 0
-          = cell.value
-        - elsif cell.notes.size > 0
-          - notes = cell.notes
-          - notes = notes+[nil]*(sq_size-notes.size) if notes.size < sq_size
-          = "<div style='font-size: 8pt;width: auto'>".html_safe
-          = "#{notes[0..2].join}#{'&nbsp;'*notes[0..2].count(nil)}<br>".html_safe
-          = "#{notes[3..5].join}#{'&nbsp;'*notes[3..5].count(nil)}<br>".html_safe
-          = "#{notes[6..8].join}#{'&nbsp;'*notes[6..8].count(nil)}</div>".html_safe
-        - else
-          = ('&nbsp;'*3).html_safe
+        - klass = 'blue' if cell.value == @colored_number
+        - klass = 'blue lighten-2' if cell.notes.include?(@colored_number)
+      %td.allow-hover.cell{class: "#{klass}", id: "row_#{r}_col_#{c}"}
+        = link_to board_show_options_path(@board,r,c), style: 'color: black;', class: 'list-numbers', data: {row: r, col: c, region: cell.region} do
+          - if cell.value.to_i > 0
+            = cell.value
+          - elsif cell.notes.size > 0
+            - notes = cell.notes
+            - notes = notes+[nil]*(sq_size-notes.size) if notes.size < sq_size
+            = "<div style='font-size: 8pt;width: auto'>".html_safe
+            = "#{notes[0..2].join}#{'&nbsp;'*notes[0..2].count(nil)}<br>".html_safe
+            = "#{notes[3..5].join}#{'&nbsp;'*notes[3..5].count(nil)}<br>".html_safe
+            = "#{notes[6..8].join}#{'&nbsp;'*notes[6..8].count(nil)}</div>".html_safe
+          - else
+            = ('&nbsp;'*3).html_safe

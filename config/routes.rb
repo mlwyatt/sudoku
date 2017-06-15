@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   resources :users
   resources :boards do
     match 'color/:colored_number' => 'boards#color_number', via: :get, as: :color_number
-    get   'reset'    => 'boards#reset'
+    get   'reset' => 'boards#reset'
     get   'options/:row/:col' => 'boards#options', as: :show_options
     match 'add/:number' => 'boards#add', via: [:get,:post], as: :add_number
     match 'notes/:notes/' => 'boards#save_notes', via: [:get,:post], as: :save_notes

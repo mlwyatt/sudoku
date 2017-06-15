@@ -1,7 +1,6 @@
 class BoardsController < ApplicationController
   before_action :logged_in_user
-  before_action :force_trailing_slash, only: [:show, :index]
-  before_action :get_board, only: [:show,:add,:options,:color_number,:save_notes,:reset,:destroy,:take_notes,:clear_notes]
+  before_action :get_board, only: [:show,:add,:options,:save_notes,:reset,:destroy,:take_notes,:clear_notes]
 
   def index
     @boards = current_user.boards
@@ -19,11 +18,6 @@ class BoardsController < ApplicationController
     end
   end
 
-  def color_number
-    @colored_number = params[:colored_number].to_i if params[:colored_number].to_i > 0
-    render(partial: 'boards/partials/show', layout: false)
-  end
-
   def options
     @row = params[:row]
     @col = params[:col]
@@ -38,13 +32,19 @@ class BoardsController < ApplicationController
   end
 
   def add
-    @board.cells.find_by(row: params[:row].to_i, column: params[:col].to_i).update_attributes!(value: params[:number].to_i, notes: nil)
-    render(partial: 'boards/partials/show', layout: false)
+    cell = @board.cells.find_by(row: params[:row].to_i, column: params[:col].to_i)
+    cell.update_attributes!(value: params[:number].to_i, notes: nil)
+    rjr success: true,
+        cell: cell,
+        class: @board.number_class(cell.value)
   end
 
   def save_notes
-    @board.cells.find_by(row: params[:row].to_i, column: params[:col].to_i).update_attributes!(value: 0, notes: params[:notes].split(',').map(&:to_i))
-    render(partial: 'boards/partials/show', layout: false)
+    cell = @board.cells.find_by(row: params[:row].to_i, column: params[:col].to_i)
+    cell.update_attributes!(value: 0, notes: params[:notes].split(',').map(&:to_i))
+    rjr success: true,
+        cell: cell,
+        class: @board.number_class(cell.value)
   end
 
   def get_board

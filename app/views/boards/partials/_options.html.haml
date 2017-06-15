@@ -5,7 +5,7 @@
       - 3.times do |i|
         %tr
           - 3. times do |j|
-            %td.allow-hover{id: "cell#{count}", onclick: "manage_selection(#{count})"}
+            %td.allow-hover{id: "cell#{count}", onclick: "manage_selection(this,#{count})", href: board_add_number_path(@board,'NUMBER')}
               = count
               - count = count + 1
 .section.center
@@ -15,8 +15,8 @@
   = label_tag 'taking_notes', 'Taking Notes', style: 'font-weight: normal;'
 .modal-footer
   = link_to 'Cancel', '#', onclick: "closeModal('sudoku'); return false;", class: 'right btn-flat'
-  = link_to 'Clear', '#', onclick: "choose_number(#{0}); return false;", class: 'right btn-flat'
-  = link_to 'Save Notes', '#', class: 'right btn-flat', style: 'display: none', id:'saving_notes', onclick: 'save_notes(); return false;'
+  = link_to 'Clear', board_add_number_path(@board,0), class: 'right btn-flat'
+  = link_to 'Save Notes', board_save_notes_path(@board,'NOTES'), class: 'right btn-flat save-notes', style: 'display: none', id:'saving_notes', onclick: 'save_notes(); return false;'
 - if @cell.notes.size > 1
   - @cell.notes.each do |i|
     .notes{data: {notes: i}}
