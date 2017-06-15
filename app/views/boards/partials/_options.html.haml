@@ -11,21 +11,21 @@
 .section.center
   = hidden_field_tag :row, @row
   = hidden_field_tag :col, @col
-  = check_box_tag 'taking', 'notes', @cell.is_a?(Array) && @cell.count > 0, autocomplete: 'off', id: 'taking_notes'
+  = check_box_tag 'taking', 'notes', @cell.notes.size > 1, autocomplete: 'off', id: 'taking_notes'
   = label_tag 'taking_notes', 'Taking Notes', style: 'font-weight: normal;'
 .modal-footer
   = link_to 'Cancel', '#', onclick: "closeModal('sudoku'); return false;", class: 'right btn-flat'
   = link_to 'Clear', '#', onclick: "choose_number(#{0}); return false;", class: 'right btn-flat'
   = link_to 'Save Notes', '#', class: 'right btn-flat', style: 'display: none', id:'saving_notes', onclick: 'save_notes(); return false;'
-- if @cell.is_a?(Array)
-  - @cell.each do |i|
+- if @cell.notes.size > 1
+  - @cell.notes.each do |i|
     .notes{data: {notes: i}}
 :javascript
   $("#taking_notes").change(function(){
-    save = $("#saving_notes")
+    var save = $("#saving_notes");
     if (this.checked){
       save.css('display', 'inline');
-      notes = [];
+      window.notes = [];
     }
     else {
       save.css('display', 'none')
