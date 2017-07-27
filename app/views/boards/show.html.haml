@@ -5,15 +5,15 @@
     .col= link_to 'Your Sudoku boards', boards_path, class: 'btn-flat waves-effect'
     .col= link_to 'Reset Board', board_reset_path(@board), class: 'btn-flat waves-effect reset-board'
   .row
-    .col= link_to '1', '#', style: 'color: black;', class: "btn-floating waves-effect waves-circle #{@board.number_finished?(1) ? 'green' : 'red'} highlight-number"
-    .col= link_to '2', '#', style: 'color: black;', class: "btn-floating waves-effect waves-circle #{@board.number_finished?(2) ? 'green' : 'red'} highlight-number"
-    .col= link_to '3', '#', style: 'color: black;', class: "btn-floating waves-effect waves-circle #{@board.number_finished?(3) ? 'green' : 'red'} highlight-number"
-    .col= link_to '4', '#', style: 'color: black;', class: "btn-floating waves-effect waves-circle #{@board.number_finished?(4) ? 'green' : 'red'} highlight-number"
-    .col= link_to '5', '#', style: 'color: black;', class: "btn-floating waves-effect waves-circle #{@board.number_finished?(5) ? 'green' : 'red'} highlight-number"
-    .col= link_to '6', '#', style: 'color: black;', class: "btn-floating waves-effect waves-circle #{@board.number_finished?(6) ? 'green' : 'red'} highlight-number"
-    .col= link_to '7', '#', style: 'color: black;', class: "btn-floating waves-effect waves-circle #{@board.number_finished?(7) ? 'green' : 'red'} highlight-number"
-    .col= link_to '8', '#', style: 'color: black;', class: "btn-floating waves-effect waves-circle #{@board.number_finished?(8) ? 'green' : 'red'} highlight-number"
-    .col= link_to '9', '#', style: 'color: black;', class: "btn-floating waves-effect waves-circle #{@board.number_finished?(9) ? 'green' : 'red'} highlight-number"
+    .col= link_to '1', '#', style: 'color: black;', class: "btn-floating waves-effect waves-circle #{@board.number_finished?(1) ? 'green' : ''} red highlight-number"
+    .col= link_to '2', '#', style: 'color: black;', class: "btn-floating waves-effect waves-circle #{@board.number_finished?(2) ? 'green' : ''} red highlight-number"
+    .col= link_to '3', '#', style: 'color: black;', class: "btn-floating waves-effect waves-circle #{@board.number_finished?(3) ? 'green' : ''} red highlight-number"
+    .col= link_to '4', '#', style: 'color: black;', class: "btn-floating waves-effect waves-circle #{@board.number_finished?(4) ? 'green' : ''} red highlight-number"
+    .col= link_to '5', '#', style: 'color: black;', class: "btn-floating waves-effect waves-circle #{@board.number_finished?(5) ? 'green' : ''} red highlight-number"
+    .col= link_to '6', '#', style: 'color: black;', class: "btn-floating waves-effect waves-circle #{@board.number_finished?(6) ? 'green' : ''} red highlight-number"
+    .col= link_to '7', '#', style: 'color: black;', class: "btn-floating waves-effect waves-circle #{@board.number_finished?(7) ? 'green' : ''} red highlight-number"
+    .col= link_to '8', '#', style: 'color: black;', class: "btn-floating waves-effect waves-circle #{@board.number_finished?(8) ? 'green' : ''} red highlight-number"
+    .col= link_to '9', '#', style: 'color: black;', class: "btn-floating waves-effect waves-circle #{@board.number_finished?(9) ? 'green' : ''} red highlight-number"
     .col.s2= link_to 'Fill Notes', board_take_notes_path(@board), class: 'btn-flat take-notes'
     .col.s2= link_to 'Clear Notes', board_clear_notes_path(@board), class: 'btn-flat clear-notes'
   .row

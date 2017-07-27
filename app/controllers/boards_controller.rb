@@ -7,7 +7,7 @@ class BoardsController < ApplicationController
   end
 
   def destroy
-    @board.delete
+    @board.destroy
     redirect_to boards_url
   end
 
@@ -27,24 +27,22 @@ class BoardsController < ApplicationController
 
   def new
     @board = current_user.boards.create!(size: params[:size] || 3)
-    reset_board
+    init_board
     redirect_to board_url(@board)
   end
 
   def add
     cell = @board.cells.find_by(row: params[:row].to_i, column: params[:col].to_i)
     cell.update_attributes!(value: params[:number].to_i, notes: nil)
-    rjr success: true,
-        cell: cell,
-        class: @board.number_class(cell.value)
+    # render(partial: 'boards/partials/show', layout: false)
+    # fixme render show (non-partial) to fix #10 fully?
+    rjr({html: (render_to_string(partial: 'boards/partials/show', layout: false)), number_finished: @board.number_finished?(cell.value)})
   end
 
   def save_notes
     cell = @board.cells.find_by(row: params[:row].to_i, column: params[:col].to_i)
     cell.update_attributes!(value: 0, notes: params[:notes].split(',').map(&:to_i))
-    rjr success: true,
-        cell: cell,
-        class: @board.number_class(cell.value)
+    render(partial: 'boards/partials/show', layout: false)
   end
 
   def get_board
@@ -73,20 +71,26 @@ class BoardsController < ApplicationController
 
   def reset
     reset_board
-    render(partial: 'boards/partials/show', layout: false)
+    render(partial: 'boards/partials/show_empty', layout: false)
   end
 
   private
 
-  def reset_board
+  def init_board
     size = @board.size
-    sq = size * size
+    sq = @board.sq_size
+    cells = []
     sq.times do |r|
       sq.times do |c|
-        cell = @board.cells.find_or_create_by!(row: r, column: c, region: size*(r/size)+(c/size))
-        cell.update_attributes!(value: 0, notes: nil)
+        cells << {row: r, column: c, region: size*(r/size)+(c/size), value: 0, notes: nil}
       end
     end
+    @board.update_attributes!(cells_attributes: cells)
+  end
+
+  def reset_board
+    cells = @board.cells.map{|c| c.attributes.except('created_at','updated_at').merge({value: 0, notes: nil})}
+    @board.update_attributes!(cells_attributes: cells)
   end
 
   def board_params

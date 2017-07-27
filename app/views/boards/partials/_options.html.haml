@@ -15,7 +15,7 @@
   = label_tag 'taking_notes', 'Taking Notes', style: 'font-weight: normal;'
 .modal-footer
   = link_to 'Cancel', '#', onclick: "closeModal('sudoku'); return false;", class: 'right btn-flat'
-  = link_to 'Clear', board_add_number_path(@board,0), class: 'right btn-flat'
+  = link_to 'Clear', board_add_number_path(@board,0), class: 'right btn-flat clear-cell'
   = link_to 'Save Notes', board_save_notes_path(@board,'NOTES'), class: 'right btn-flat save-notes', style: 'display: none', id:'saving_notes', onclick: 'save_notes(); return false;'
 - if @cell.notes.size > 1
   - @cell.notes.each do |i|

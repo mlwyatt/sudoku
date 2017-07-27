@@ -1,0 +1,8 @@
+- size = @board.size
+- sq_size = @board.sq_size
+- sq_size.times do |r|
+  %tr
+    - sq_size.times do |c|
+      %td.allow-hover.cell.list-numbers{id: "row_#{r}_col_#{c}"}
+        = link_to board_show_options_path(@board,r,c), style: 'color: black;', data: {row: r, col: c, region: size*(r/size)+(c/size)} do
+          = ('&nbsp;'*3).html_safe

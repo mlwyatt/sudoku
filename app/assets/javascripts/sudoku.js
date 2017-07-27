@@ -1,3 +1,4 @@
+var choosingCell;
 $(document).ready(function() {
   $('.highlight-number').on('click', function(e) {
     e.preventDefault();
@@ -5,7 +6,7 @@ $(document).ready(function() {
   });
   $('.take-notes').on('click', function(e) {
     e.preventDefault();
-    take_notes(el);
+    take_notes(this);
   });
   $('.clear-notes').on('click', function(e) {
     e.preventDefault();
@@ -13,20 +14,26 @@ $(document).ready(function() {
   });
   $('.list-numbers').on('click', function(e) {
     e.preventDefault();
+    choosingCell = this;
     list_numbers(this);
   });
   $('.reset-board').on('click', function(e) {
     e.preventDefault();
     reset(this);
   });
-}).on('click', '.save-notes', function(e) {
+})
+.on('click', '.save-notes', function(e) {
   e.preventDefault();
-  save_notes(this)
+  save_notes(this);
+})
+.on('click','.clear-cell',function(e){
+  e.preventDefault();
+  choose_number(this,0);
 });
 
 function list_numbers(el) {
   $.ajax({
-    url: el.href,
+    url: $(el).attr('href'),
     success: function(data) {
       $("#sudoku_modal").html(data);
       $("#sudoku_modal").openModal();
@@ -41,9 +48,16 @@ function choose_number(el,number) {
     type: 'post',
     data: data,
     success: function(data) {
-      $("#full-table").html(data);
-      $('td:contains(' + highlighted + ')').not('[id^="cell"]').addClass('blue');
-      $('td:contains(' + highlighted + '):has(div)').not('[id^="cell"]').addClass('lighten-2');
+      $("#full-table").html(data.html);
+      $('td:contains(' + highlighted + ')').addClass('blue');
+      $('td:contains(' + highlighted + '):has(div)').addClass('lighten-2');
+      if (data.number_finished) {
+        $('.highlight-number:contains(' + number + ')').addClass('green').removeClass('blue');
+      }
+      else {
+        // fixme number is 0 when clearing
+        $('.highlight-number:contains(' + number + ')').removeClass('green');
+      }
       closeModal('sudoku');
     }
   })
@@ -54,6 +68,8 @@ function reset(el) {
     url: el.href,
     success: function(data) {
       $("#full-table").html(data);
+      $('.green').removeClass('green').addClass('red');
+      $('.blue').removeClass('blue');
     }
   })
 }
@@ -72,15 +88,15 @@ function highlight_number(number, link) {
   }
   clear_highlight(highlighted != number);
   if (highlighted == number) {
-    highlighted = null
+    highlighted = null;
     return;
   }
   else {
     $('a.blue').removeClass('blue');
     $(link).addClass('blue');
     highlighted = number;
-    $('td:contains(' + highlighted + ')').not('[id^="cell"]').addClass('blue');
-    $('td:contains(' + highlighted + '):has(div)').not('[id^="cell"]').addClass('lighten-2');
+    $('td:contains(' + highlighted + ')').not('.red').addClass('blue');
+    $('td:contains(' + highlighted + '):has(div)').not('.red').addClass('lighten-2');
   }
 }
 
@@ -91,8 +107,8 @@ function take_notes(el) {
     type: 'post',
     success: function(data) {
       $("#full-table").html(data);
-      $('td:contains(' + highlighted + ')').not('[id^="cell"]').addClass('blue');
-      $('td:contains(' + highlighted + '):has(div)').not('[id^="cell"]').addClass('lighten-2');
+      $('td:contains(' + highlighted + ')').not('.red').addClass('blue');
+      $('td:contains(' + highlighted + '):has(div)').not('.red').addClass('lighten-2');
       Materialize.toast('Finished!', 4000, 'good');
     }
   });
@@ -104,9 +120,8 @@ function clear_notes(el) {
     url: el.href,
     type: 'post',
     success: function(data) {
-      //console.log(data);
       $("#full-table").html(data);
-      $('td:contains(' + highlighted + ')').not('[id^="cell"]').addClass('blue');
+      $('td:contains(' + highlighted + ')').not('.red').addClass('blue');
       Materialize.toast('Finished!', 4000, 'good');
     }
   });
@@ -139,8 +154,8 @@ function save_notes(el) {
     success: function(data) {
       $("#full-table").html(data);
       closeModal('sudoku');
-      $('td:contains(' + highlighted + ')').not('[id^="cell"]').addClass('blue');
-      $('td:contains(' + highlighted + '):has(div)').not('[id^="cell"]').addClass('lighten-2');
+      $('td:contains(' + highlighted + ')').not('.red').addClass('blue');
+      $('td:contains(' + highlighted + '):has(div)').not('.red').addClass('lighten-2');
     }
   })
 }
