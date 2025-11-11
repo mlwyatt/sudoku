@@ -58,93 +58,93 @@ reviews:
     # Documentation that changes frequently
     - "CHANGELOG.md"
 
-# Path-based instructions
-path_instructions:
-  - path: "app/controllers/**/*.rb"
-    instructions: |
-      - Check for proper strong parameters usage
-      - Verify authorization checks are in place
-      - Look for N+1 query potential
-      - Ensure proper error handling and response formats
+  # Path-based instructions
+  path_instructions:
+    - path: "app/controllers/**/*.rb"
+      instructions: |
+        - Check for proper strong parameters usage
+        - Verify authorization checks are in place
+        - Look for N+1 query potential
+        - Ensure proper error handling and response formats
 
-  - path: "app/models/**/*.rb"
-    instructions: |
-      - Review ActiveRecord associations and validations
-      - Check for proper scopes and query optimization
-      - Verify callback usage is appropriate
-      - Look for potential database performance issues
+    - path: "app/models/**/*.rb"
+      instructions: |
+        - Review ActiveRecord associations and validations
+        - Check for proper scopes and query optimization
+        - Verify callback usage is appropriate
+        - Look for potential database performance issues
 
-  - path: "app/views/**/*.html.erb"
-    instructions: |
-      - Check for XSS vulnerabilities (proper use of sanitize/raw)
-      - Verify Bulma classes are used correctly
-      - Look for accessibility issues (ARIA labels, semantic HTML)
-      - Check for proper i18n usage
+    - path: "app/views/**/*.html.erb"
+      instructions: |
+        - Check for XSS vulnerabilities (proper use of sanitize/raw)
+        - Verify Bulma classes are used correctly
+        - Look for accessibility issues (ARIA labels, semantic HTML)
+        - Check for proper i18n usage
 
-  - path: "app/views/**/*.html+turbo_frame.erb"
-    instructions: |
-      - Verify turbo_frame_tag is properly used with unique IDs
-      - Check that frame content is self-contained and doesn't leak outside
-      - Ensure proper handling of nested frames if applicable
-      - Look for XSS vulnerabilities (proper use of sanitize/raw)
-      - Verify Bulma classes are used correctly
-      - Check for accessibility issues (ARIA labels, semantic HTML)
+    - path: "app/views/**/*.html+turbo_frame.erb"
+      instructions: |
+        - Verify turbo_frame_tag is properly used with unique IDs
+        - Check that frame content is self-contained and doesn't leak outside
+        - Ensure proper handling of nested frames if applicable
+        - Look for XSS vulnerabilities (proper use of sanitize/raw)
+        - Verify Bulma classes are used correctly
+        - Check for accessibility issues (ARIA labels, semantic HTML)
 
-  - path: "app/views/**/*.turbo_stream.erb"
-    instructions: |
-      - Verify proper use of turbo_stream actions (append, prepend, replace, update, remove)
-      - Check that target IDs match existing DOM elements
-      - Ensure actions are appropriate for the use case
-      - Look for potential race conditions with multiple streams
-      - Verify proper handling of multiple turbo_stream actions in sequence
-      - Check for XSS vulnerabilities in rendered content
+    - path: "app/views/**/*.turbo_stream.erb"
+      instructions: |
+        - Verify proper use of turbo_stream actions (append, prepend, replace, update, remove)
+        - Check that target IDs match existing DOM elements
+        - Ensure actions are appropriate for the use case
+        - Look for potential race conditions with multiple streams
+        - Verify proper handling of multiple turbo_stream actions in sequence
+        - Check for XSS vulnerabilities in rendered content
 
-  - path: "app/javascript/controllers/**/*_controller.{js,ts}"
-    instructions: |
-      - Verify Stimulus lifecycle methods are used correctly
-      - Check for proper target and action declarations
-      - Look for memory leaks (event listener cleanup)
-      - Ensure controllers are focused and single-purpose
+    - path: "app/javascript/controllers/**/*_controller.{js,ts}"
+      instructions: |
+        - Verify Stimulus lifecycle methods are used correctly
+        - Check for proper target and action declarations
+        - Look for memory leaks (event listener cleanup)
+        - Ensure controllers are focused and single-purpose
 
-  - path: "app/javascript/**/*.{js,ts}"
-    instructions: |
-      - Defer to ESLint for style issues
-      - Focus on logic errors and potential bugs
-      - Check for accessibility in DOM manipulations
-      - Verify proper error handling
+    - path: "app/javascript/**/*.{js,ts}"
+      instructions: |
+        - Defer to ESLint for style issues
+        - Focus on logic errors and potential bugs
+        - Check for accessibility in DOM manipulations
+        - Verify proper error handling
 
-  - path: "spec/**/*_spec.rb"
-    instructions: |
-      - Check test coverage of edge cases
-      - Verify proper use of factories/fixtures
-      - Look for brittle tests (time-dependent, order-dependent)
-      - Ensure tests are readable and well-described
+    - path: "spec/**/*_spec.rb"
+      instructions: |
+        - Check test coverage of edge cases
+        - Verify proper use of factories/fixtures
+        - Look for brittle tests (time-dependent, order-dependent)
+        - Ensure tests are readable and well-described
 
-  - path: "db/migrate/**/*.rb"
-    instructions: |
-      - Check for reversible migrations
-      - Verify indexes are added for foreign keys and frequently queried columns
-      - Look for potential data loss or dangerous operations
-      - Check for proper up/down or change methods
+    - path: "db/migrate/**/*.rb"
+      instructions: |
+        - Check for reversible migrations
+        - Verify indexes are added for foreign keys and frequently queried columns
+        - Look for potential data loss or dangerous operations
+        - Check for proper up/down or change methods
 
-  - path: "config/routes.rb"
-    instructions: |
-      - Verify RESTful conventions are followed
-      - Check for proper namespacing and versioning
-      - Look for unused or redundant routes
-      - If routes.rb exceeds 500 lines total, suggest extracting related routes to config/routes/ directory
-      - If adding 50+ lines of related routes, suggest extracting to config/routes/ using draw()
-      - If some routes are already extracted (draw() calls exist), maintain consistency by extracting similar route groups
+    - path: "config/routes.rb"
+      instructions: |
+        - Verify RESTful conventions are followed
+        - Check for proper namespacing and versioning
+        - Look for unused or redundant routes
+        - If routes.rb exceeds 500 lines total, suggest extracting related routes to config/routes/ directory
+        - If adding 50+ lines of related routes, suggest extracting to config/routes/ using draw()
+        - If some routes are already extracted (draw() calls exist), maintain consistency by extracting similar route groups
 
-  - path: "config/routes/**/*.rb"
-    instructions: |
-      - Verify RESTful conventions are followed
-      - Check for proper namespacing and versioning
-      - Look for unused or redundant routes
-      - Ensure the extracted routes file is cohesive and logically grouped
-      - Verify routes are properly scoped within the draw block
-      - Check that the file has a clear purpose (e.g., admin routes, api routes, etc.)
-      - Ensure extracted routes meet the extraction criteria (50+ lines of related routes)
+    - path: "config/routes/**/*.rb"
+      instructions: |
+        - Verify RESTful conventions are followed
+        - Check for proper namespacing and versioning
+        - Look for unused or redundant routes
+        - Ensure the extracted routes file is cohesive and logically grouped
+        - Verify routes are properly scoped within the draw block
+        - Check that the file has a clear purpose (e.g., admin routes, api routes, etc.)
+        - Ensure extracted routes meet the extraction criteria (50+ lines of related routes)
 
 # Tone and focus (max 250 chars)
 tone_instructions: "Rails app with Hotwire. Defer to RuboCop/ESLint for style. Focus on security, performance, Rails/Stimulus/Turbo patterns. Be constructive and educational."
