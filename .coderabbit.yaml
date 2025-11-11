@@ -146,27 +146,9 @@ path_instructions:
       - Check that the file has a clear purpose (e.g., admin routes, api routes, etc.)
       - Ensure extracted routes meet the extraction criteria (50+ lines of related routes)
 
-# Tone and focus
-tone_instructions: |
-  You are reviewing a Rails application with Stimulus/Bulma frontend.
+# Tone and focus (max 250 chars)
+tone_instructions: "Rails app with Hotwire. Defer to RuboCop/ESLint for style. Focus on security, performance, Rails/Stimulus/Turbo patterns. Be constructive and educational."
 
-  Important guidelines:
-  - RuboCop handles Ruby style - focus on logic, security, and Rails best practices
-  - ESLint handles JavaScript/TypeScript style - focus on Stimulus patterns and logic
-  - Prioritize security issues (SQL injection, XSS, CSRF, mass assignment)
-  - Highlight performance concerns (N+1 queries, missing indexes, inefficient queries)
-  - Be constructive and educational - explain WHY something is an issue
-  - Suggest specific Rails/Stimulus idioms when applicable
-  - Don't nitpick formatting or style issues already covered by linters
-
-  Areas of focus:
-  - Security vulnerabilities
-  - Performance bottlenecks
-  - Rails anti-patterns
-  - Stimulus controller best practices
-  - Accessibility issues in views
-  - Missing error handling
-  - Test coverage gaps
 
 # Early access features
 early_access: false
