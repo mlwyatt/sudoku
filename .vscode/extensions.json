@@ -1,0 +1,4 @@
+// This file will recommend the dev container extension to the host
+{
+  "recommendations": ["ms-vscode-remote.remote-containers"]
+}

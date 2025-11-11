@@ -8,7 +8,7 @@ x-build: &build
   image: "element:${SUDOKU_TAG:-0}"
   volumes:
     - .:/Sudoku
-    - node_modules:/${APP_PATH:-Sudoku}/node_modules
+    - node_modules:/${APP_PATH:-/Sudoku}/node_modules
     - bundle:/usr/local/bundle
 x-interactive: &interactive
   # allow interactive connection
