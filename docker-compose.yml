@@ -5,7 +5,7 @@
 x-build: &build
   # `build` and `image` to only build the image once
   build: .
-  image: "element:${SUDOKU_TAG:-0}"
+  image: "sudoku:${SUDOKU_TAG:-0}"
   volumes:
     - .:/Sudoku
     - node_modules:/${APP_PATH:-/Sudoku}/node_modules
