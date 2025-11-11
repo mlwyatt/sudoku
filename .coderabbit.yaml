@@ -23,6 +23,41 @@ reviews:
   collapse_walkthrough: true
   show_effort: true
 
+  # Files to exclude from review
+  excluded_files:
+    # Dependencies
+    - "Gemfile.lock"
+    - "yarn.lock"
+
+    # Build artifacts
+    - "public/assets/**"
+    - "tmp/**"
+    - "log/**"
+    - "node_modules/**"
+
+    # Generated files
+    - "db/schema.rb"
+    - "app/assets/builds/**"
+
+    # Binary/media files
+    - "**/*.svg"
+    - "**/*.png"
+    - "**/*.jpg"
+    - "**/*.jpeg"
+    - "**/*.gif"
+    - "**/*.ico"
+    - "**/*.woff"
+    - "**/*.woff2"
+    - "**/*.ttf"
+    - "**/*.eot"
+
+    # Minified files
+    - "**/*.min.js"
+    - "**/*.min.css"
+
+    # Documentation that changes frequently
+    - "CHANGELOG.md"
+
 # Path-based instructions
 path_instructions:
   - path: "app/controllers/**/*.rb"
@@ -110,42 +145,6 @@ path_instructions:
       - Verify routes are properly scoped within the draw block
       - Check that the file has a clear purpose (e.g., admin routes, api routes, etc.)
       - Ensure extracted routes meet the extraction criteria (50+ lines of related routes)
-
-# Files to exclude from review
-reviews:
-  excluded_files:
-    # Dependencies
-    - "Gemfile.lock"
-    - "yarn.lock"
-
-    # Build artifacts
-    - "public/assets/**"
-    - "tmp/**"
-    - "log/**"
-    - "node_modules/**"
-
-    # Generated files
-    - "db/schema.rb"
-    - "app/assets/builds/**"
-
-    # Binary/media files
-    - "**/*.svg"
-    - "**/*.png"
-    - "**/*.jpg"
-    - "**/*.jpeg"
-    - "**/*.gif"
-    - "**/*.ico"
-    - "**/*.woff"
-    - "**/*.woff2"
-    - "**/*.ttf"
-    - "**/*.eot"
-
-    # Minified files
-    - "**/*.min.js"
-    - "**/*.min.css"
-
-    # Documentation that changes frequently
-    - "CHANGELOG.md"
 
 # Tone and focus
 tone_instructions: |
