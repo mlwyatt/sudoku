@@ -21,42 +21,42 @@ reviews:
   poem: true
   review_status: true
   collapse_walkthrough: true
-  show_effort: true
+  estimate_code_review_effort: true
 
   # Files to exclude from review
-  excluded_files:
+  path_filters:
     # Dependencies
-    - "Gemfile.lock"
-    - "yarn.lock"
+    - "!Gemfile.lock"
+    - "!yarn.lock"
 
     # Build artifacts
-    - "public/assets/**"
-    - "tmp/**"
-    - "log/**"
-    - "node_modules/**"
+    - "!public/assets/**"
+    - "!tmp/**"
+    - "!log/**"
+    - "!node_modules/**"
 
     # Generated files
-    - "db/schema.rb"
-    - "app/assets/builds/**"
+    - "!db/schema.rb"
+    - "!app/assets/builds/**"
 
     # Binary/media files
-    - "**/*.svg"
-    - "**/*.png"
-    - "**/*.jpg"
-    - "**/*.jpeg"
-    - "**/*.gif"
-    - "**/*.ico"
-    - "**/*.woff"
-    - "**/*.woff2"
-    - "**/*.ttf"
-    - "**/*.eot"
+    - "!**/*.svg"
+    - "!**/*.png"
+    - "!**/*.jpg"
+    - "!**/*.jpeg"
+    - "!**/*.gif"
+    - "!**/*.ico"
+    - "!**/*.woff"
+    - "!**/*.woff2"
+    - "!**/*.ttf"
+    - "!**/*.eot"
 
     # Minified files
-    - "**/*.min.js"
-    - "**/*.min.css"
+    - "!**/*.min.js"
+    - "!**/*.min.css"
 
     # Documentation that changes frequently
-    - "CHANGELOG.md"
+    - "!CHANGELOG.md"
 
   # Path-based instructions
   path_instructions:
