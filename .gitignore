@@ -17,3 +17,7 @@
 /tmp
 .idea/*
 .byebug_history
+node_modules
+
+
+.gems

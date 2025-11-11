@@ -1,0 +1,48 @@
+# Development compose override
+# Command: docker compose up -d
+
+# prepend with x- for docker to ignore
+x-build: &build
+  # `build` and `image` to only build the image once
+  build: .
+  image: "element:${SUDOKU_TAG:-0}"
+  volumes:
+    - .:/Sudoku
+    - node_modules:/${APP_PATH:-Sudoku}/node_modules
+    - bundle:/usr/local/bundle
+x-interactive: &interactive
+  # allow interactive connection
+  tty: true
+  stdin_open: true
+x-environment: &environment
+  RAILS_ENV: development
+  EDITOR: vim
+x-shared: &shared
+  <<: [ *build, *interactive ]
+  environment: *environment
+
+services:
+  rails:
+    <<: *shared
+    command: /bin/bash
+    profiles:
+      - rails
+  web:
+    <<: *shared
+    command: rails s -p 3000 -b 0.0.0.0
+    ports:
+      - 3000:3000
+  css:
+    <<: *shared
+    command: yarn build:css --watch
+    depends_on:
+      - web
+  js:
+    <<: *shared
+    command: yarn build:ts
+    depends_on:
+      - web
+
+volumes:
+  bundle:
+  node_modules:

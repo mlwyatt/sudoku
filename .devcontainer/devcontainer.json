@@ -1,0 +1,51 @@
+{
+  "name": "Sudoku",
+  "dockerComposeFile": "../docker-compose.yml",
+  "service": "rails",
+  "runServices": ["rails"],
+  "workspaceFolder": "/Sudoku",
+  "customizations": {
+    "vscode": {
+      "extensions":[
+        "aki77.rails-db-schema",
+        "eskimoblood.create-test",
+        "fabiospampinato.vscode-highlight",
+        "aliariff.auto-add-brackets",
+        "github.copilot",
+        "github.copilot-chat",
+        "github.vscode-github-actions",
+        "github.vscode-pull-request-github",
+        "gurgeous.bust-a-gem",
+        "jamitech.simply-blame",
+        "karunamurti.haml",
+        "mechatroner.rainbow-csv",
+        "mhutchie.git-graph",
+        "mickey.code-copy-ruby-ref",
+        "ms-vscode-remote.remote-containers",
+        "ms-vscode-remote.remote-ssh",
+        "ms-vscode-remote.remote-ssh-edit",
+        "ms-vscode.remote-explorer",
+        "ninoseki.vscode-mogami",
+        "orepor.color-tabs-vscode-ext",
+        "reliutg.bulma-css-class-completion",
+        "shanehofstetter.rails-open-partial",
+        "shopify.ruby-lsp",
+        "tavo.rails-schema",
+        "wmaurer.change-case",
+        "aki77.rails-routes",
+        "jemmyw.rails-fast-nav",
+        "dbaeumer.vscode-eslint",
+        "pavlitsky.yard",
+        "ctf0.macros",
+        "IBM.output-colorizer",
+        "Gruntfuggly.todo-tree",
+        "IgorSbitnev.error-gutters",
+        "Fooo.ruby-spec-runner",
+        "MS-vsliveshare.vsliveshare",
+        "Anthropic.claude-code",
+        "coderabbit.coderabbit-vscode"
+      ]
+    }
+  },
+  "postCreateCommand": "bundle install && yarn install && ln -sf /usr/local/bundle /$APP_PATH/.gems"
+}

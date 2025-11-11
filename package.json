@@ -1,0 +1,31 @@
+{
+  "name": "app-elementcoverage-com",
+  "private": true,
+  "version": "1.0.0",
+  "dependencies": {
+    "@hotwired/stimulus": "~3.2.0",
+    "@hotwired/turbo-rails": "~7.2.5",
+    "bulma": "~0.9.4",
+    "esbuild": "^0.14.49",
+    "esbuild-rails": "~1.0.3",
+    "sass": "~1.53.0",
+    "@rails/actiontext": "~8.0.300",
+    "@esbuild-plugins/tsconfig-paths": "0.1.2"
+  },
+  "devDependencies": {
+    "typescript": "5.5.4",
+    "tsc-watch": "6.0.0",
+    "@brandsinsurance/eslint-plugin": "~4.1.0",
+    "eslint-import-resolver-typescript": "~4.4.3"
+  },
+  "scripts": {
+    "test": "tsc --noEmit && yarn lint app",
+    "lint": "./node_modules/.bin/eslint --report-unused-disable-directives",
+    "build:css": "sass ./app/assets/stylesheets/application.scss ./app/assets/builds/application.css --embed-sources --load-path=node_modules",
+    "build": "tsc --noEmit -p tsconfig.json && yarn build:js",
+    "build:js": "node esbuild.config.js",
+    "compile:ts": "tsc --noEmit -p tsconfig.json",
+    "failure:js": "rm -f ./app/assets/builds/application.js.map && rm -f ./app/assets/builds/application.js",
+    "build:ts": "tsc-watch --noEmit --noClear --pretty -p tsconfig.json --onSuccess \"yarn build:js --dev\" --onFailure \"yarn failure:js\""
+  }
+}

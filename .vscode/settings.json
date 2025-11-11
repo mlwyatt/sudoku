@@ -1,0 +1,361 @@
+{
+  "editor.stickyScroll.enabled": false,
+  "emmet.includeLanguages": {
+    "html.erb": "html",
+    "erb": "html",
+    "ruby": "html"
+  },
+  "emmet.syntaxProfiles": {
+    "html": {
+      "inline_break": 1
+    }
+  },
+  "emmet.variables": {
+    "erbDash": "<% ${cursor} %>",
+    "erbEqual": "<%= ${cursor} %>"
+  },
+  "files.associations": {
+    "*.rb": "ruby",
+    "Gemfile": "ruby",
+    "*.html.erb": "erb"
+  },
+  // true => VScode does not monitor
+  "files.watcherExclude": {
+    "**/.gems/**": true
+  },
+  // true => does not get search in global search
+  "search.exclude": {
+    "**/node_modules/**": true,
+    "**/.gems/**": true
+  },
+  "[erb]": {
+    "editor.formatOnSave": true,
+    "editor.formatOnSaveMode": "file"
+  },
+  "emmet.extensionsPath": [
+    "/${workspaceFolder}/.vscode/snippets.json"
+  ],
+  "colorTabs.ignoreCase": true,
+  "colorTabs.titleLabel": true,
+  "colorTabs.tabBackground": true,
+  "colorTabs.statusBarBackground": false,
+  "colorTabs.config": [
+    {
+      "regex": ".*spec.*",
+      "color": "#007f00"
+    },
+    {
+      "regex": ".*test.*",
+      "color": "#007f00"
+    }
+  ],
+  "highlight.regexFlags": "gi",
+  "highlight.regexes": {
+    "(<%(?!#)[\\s\\S]*?%>)": {
+      "decorations": [
+        {
+          "backgroundColor": "#f0d80210"
+        }
+      ]
+    },
+    "(debugger)": {
+      "decorations": [
+        {
+          "backgroundColor": "#ff000080"
+        }
+      ]
+    },
+    "([/#]+ ?(fixme|todo))": {
+      "decorations": [
+        {
+          "backgroundColor": "#fff00050"
+        }
+      ]
+    }
+  },
+  "editor.tokenColorCustomizations": {
+    "textMateRules": [
+      {
+        "scope":"meta.definition.method.ts",
+        "settings": {
+          "foreground": "#cc7832"
+        }
+      },
+      {
+        "scope":"support.type.primitive.ts",
+        "settings": {
+          "foreground": "#cc7832"
+        }
+      },
+      {
+        "scope":"storage.type.ts",
+        "settings": {
+          "foreground": "#cc7832"
+        }
+      },
+      {
+        "scope":"storage.modifier.ts",
+        "settings": {
+          "foreground": "#cc7832"
+        }
+      },
+      {
+        "scope":"variable.language.this.ts",
+        "settings": {
+          "foreground": "#cc7832"
+        }
+      },
+      {
+        "scope": "entity.name.type",
+        "settings": {
+          "foreground": "#FFFFFF"
+          // "fontStyle": "bold"
+        }
+      },
+      {
+        "scope": "variable.parameter",
+        "settings": {
+          "foreground": "#ab73d4"
+        }
+      },
+      {
+        "scope": "support.type.property-name.json",
+        "settings": {
+          "foreground": "#ab73d4"
+        }
+      },
+      {
+        "scope": "variable.other.readwrite.instance.ruby",
+        "settings": {
+          "foreground": "#d0d0ff"
+        }
+      },
+      {
+        "scope": "string.regexp",
+        "settings": {
+          "foreground": "#cc7832"
+        }
+      },
+      {
+        "scope": "string.regexp.interpolated.ruby",
+        "settings": {
+          "foreground": "#cc7832"
+        }
+      },
+      {
+        "scope": "variable",
+        "settings": {
+          "foreground": "#5285c6"
+        }
+      },
+      // {
+      //   "scope": "meta.function-call.ruby",
+      //   "settings": {
+      //     "foreground": "#5285c6"
+      //   }
+      // },
+      {
+        "scope": "keyword.operator",
+        "settings": {
+          "foreground": "#cc7832"
+        }
+      },
+      {
+        "scope": "constant.language.symbol.ruby",
+        "settings": {
+          "foreground": "#42a8ea"
+        }
+      },
+      {
+        "scope": "constant.language.symbol.hashkey.ruby",
+        "settings": {
+          "foreground": "#42a8ea"
+        }
+      },
+      {
+        "scope": "constant.language.boolean.ruby",
+        "settings": {
+          "foreground": "#cc7832"
+        }
+      },
+      {
+        "scope": "keyword.other.DML.sql",
+        "settings": {
+          "foreground": "#cc7832"
+        }
+      },
+      {
+        "scope": "constant.language.nil.ruby",
+        "settings": {
+          "foreground": "#cc7832"
+        }
+      },
+      {
+        "scope": "string.quoted",
+        "settings": {
+          "foreground": "#249e62"
+        }
+      },
+      {
+        "scope": "keyword.control",
+        "settings": {
+          "foreground": "#cc7832"
+        }
+      },
+      {
+        "scope": "variable.other.constant.ruby",
+        "settings": {
+          "foreground": "#ff3840"
+        }
+      },
+      {
+        "scope": "entity.name.type.class",
+        "settings": {
+          "foreground": "#ff3840"
+        }
+      },
+      {
+        "scope": "entity.name.namespace",
+        "settings": {
+          "foreground": "#ff3840"
+        }
+      },
+      {
+        "scope": "keyword.other.special-method.ruby",
+        "settings": {
+          "foreground": "#ff3840"
+        }
+      },
+      {
+        "scope": "entity.name.function.ruby",
+        "settings": {
+          "foreground": "#ffc66d"
+        }
+      },
+      {
+        "scope": "entity.name.function.member",
+        "settings": {
+          "foreground": "#c0c0c0"
+        }
+      }
+      // {
+      //   "scope": "entity.other.inherited-class.ruby",
+      //   "settings": {
+      //     "foreground": "#ff3840"
+      //   }
+      // },
+      // {
+      //   "scope": "entity.name.function",
+      //   "settings": {
+      //     "foreground": "#ff3840"
+      //   }
+      // }
+    ]
+  },
+  // "editor.formatOnSaveMode": "modifications",
+  "[ruby]": {
+    "editor.formatOnSave": false,
+    "editor.formatOnSaveMode": "modifications"
+    // "editor.tabSize": 2,
+    //   "editor.insertSpaces": true,
+    //   "editor.wordSeparators": "`~@#$%^&*()-=+[{]}\\|;:'\",.<>/"
+    // "editor.defaultFormatter": "rubocop.vscode-rubocop"
+  },
+  "editor.semanticHighlighting.enabled": true,
+  // "rubocop.autocorrect": true,
+  // "rubocop.safeAutocorrect": true,
+  "editor.rulers": [
+    120
+  ],
+  "[git-commit]":{
+    "editor.rulers": [
+      72
+    ],
+    "editor.wordWrap": "off"
+  },
+  "ruby.format": "lsp",
+  "editor.trimAutoWhitespace": true,
+  "files.trimTrailingWhitespace": true,
+  // "rubyLsp.enabled": false,
+  // "rubocop.enableLSP": false,
+  // true => hide this file from file explorer
+  "files.exclude": {
+    "**/.gems/**": true,
+    "public/": true
+  },
+  "editor.gotoLocation.multipleDeclarations": "goto",
+  "ruby.lsp.enabled": true,
+  "testing.automaticallyDetectTestFramework": false,
+  "testing.defaultTestFramework": "rspec",
+  "ruby.testFramework": "rspec",
+  "ruby.useBundler": true,
+  "ruby.bundlePath": "/${workspaceFolder}/.gems",
+  "ruby.intellisense": "rubyLsp",
+  "eslint.useFlatConfig": true,
+  "eslint.run": "onSave",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.rubocop": "explicit"
+  },
+  "eslint.codeActionsOnSave.mode": "problems",
+  "eslint.codeActionsOnSave.options": {
+    "source.fixAll.eslint": "never"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features",
+    "editor.formatOnSave": true,
+    "editor.formatOnSaveMode": "modifications"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+    "editor.formatOnSave": true,
+    "editor.formatOnSaveMode": "modifications"
+  },
+  "eslint.format.enable": true,
+  "eslint.lintTask.enable": true,
+  "eslint.validate": [
+    "javascript",
+    "typescript",
+    "javascriptreact",
+    "typescriptreact"
+  ],
+  "yard.spacers.beforeDescription": false,
+  "yard.spacers.beforeSingleTag": false,
+  "yard.spacers.afterSingleTag": false,
+  "yard.tags.paramNameBeforeType": true,
+  "macros.list": {
+    "commentDown": [
+      "editor.action.copyLinesDownAction",
+      "cursorUp",
+      "editor.action.addCommentLine",
+      "cursorDown"
+    ],
+    "normalComment": [
+      "editor.action.commentLine",
+      "cursorDown"
+    ],
+    "openSelection": [
+      "editor.action.clipboardCopyAction",
+      "workbench.action.quickOpen",
+      "editor.action.clipboardPasteAction"
+    ]
+    // "toggleQuotes":[
+    //   "cusorEnd",
+    //   {
+    //     "command":"type",
+    //     "args":{
+    //       "text":";"
+    //     }
+    //   }
+    // ]
+  },
+  "workbench.colorCustomizations": {
+    "editorCursor.foreground": "#FFFFFF",
+    "terminalCursor.foreground": "#FFFFFF"
+  },
+  "rubyLsp.addonSettings": {
+    "Ruby LSP Rails": {
+      "enablePendingMigrationsPrompt": false
+    }
+  },
+  "rubyLsp.testExplorer.enabled": false
+}
